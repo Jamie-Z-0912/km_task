@@ -1,0 +1,73 @@
+.phone-intro {
+    text-align: -webkit-center;
+    margin-top: 16px;
+}
+
+.phone-intro h2 {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.phone-code {
+    z-index: 100;
+    position: absolute;
+    text-align: center;
+    right: 6%;
+    margin-right: 8px;
+    margin-top: 6px;
+    background-color: #39e6d7;
+    color: white;
+    border-radius: 3px;
+    width: 96px;
+    height: 28px;
+    padding-top: 8px;
+}
+
+.phone-code-active {
+    background-color: #ddd;
+    color: #b2b2b2;
+}
+
+.phone-certain h3 {
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    width: 91%;
+    height: 34px;
+    padding-top: 12px;
+}
+
+.input1 .ui-input-text {
+    background-color: white;
+    width: 82%;
+    height: 48px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    margin: 16px auto 0 auto;
+    padding-left: 16px;
+}
+
+.input3 {
+    background-color: white;
+    height: 52px;
+}
+
+.input3 .ui-input-text {
+    background-color: white;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding-left: 16px;
+    padding-top: 6px;
+}
+
+.ui-popup-container, .ui-popup-screen {
+    position: fixed;
+}

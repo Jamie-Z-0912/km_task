@@ -1,0 +1,102 @@
+/* 赚钱首页任务列表样式 */
+.mission {
+    display: inline-block;
+    height: 80px;
+    width: 100%;
+    position: relative;
+}
+
+.mission-icon {
+    float: left;
+    position: absolute;
+}
+
+.mission-icon img {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-top: 16px;
+    margin-left: 16px;
+    width: 47px;
+    height: 47px;
+}
+
+.mission-desc {
+    max-width: 48%;
+    margin-left: 76px;
+    float: left;
+}
+
+.desc-title {
+    margin-top: 19px;
+    margin-bottom: 1px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.desc-word {
+    font-weight: 400;
+    margin-top: -2px;
+}
+
+.desc-time {
+    font-weight: 400;
+    margin-top: -2px;
+}
+
+.desc-word1 {
+    font-weight: 400;
+    margin-top: -2px;
+    margin-left: 12px;
+}
+
+.reward-num {
+    float: right;
+    line-height: 80px;
+}
+
+.reward-plus {
+    float: right;
+    line-height: 24px;
+    margin-top: 30px;
+}
+
+.mission-reward {
+    float: right;
+    height: 80px;
+    padding-right: 16px;
+}
+
+.ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li {
+    padding: 0;
+    background-color: white;
+}
+
+.ui-btn-up-c, .ui-btn-hover-c, .ui-btn-down-c {
+    font-family: PingFang SC;
+}
+
+.ui-btn-up-c {
+    border-top: 1px solid #dadce5;
+}
+
+.ui-li.ui-last-child {
+    border: 0;
+}
+
+.ui-li, .ui-li.ui-field-contain {
+    border: 0;
+}
+
+#home_popup {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 16px;
+}
+
+#home_popup p {
+    color: #fff;
+    font-size: 14px;
+}

@@ -1,0 +1,204 @@
+.input {
+    background-color: white;
+    height: 52px;
+}
+
+.input-title {
+    font-weight: 400;
+    float: left;
+    padding-top: 15px;
+    padding-left: 16px;
+}
+
+.input-rmb {
+    font-weight: 400;
+    float: left;
+    padding-top: 15px;
+    padding-left: 16px;
+}
+
+.ui-input-text.ui-focus, .ui-input-search.ui-focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.ui-input-search, div.ui-input-text {
+    margin: 0;
+}
+
+.input .ui-input-text {
+    background-color: white;
+    margin-left: 12px;
+    border: none;
+    position: relative;
+    box-shadow: none;
+    float: left;
+    margin-top: 9px;
+}
+
+.input .ui-select .ui-btn {
+    height: 52px;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+.ui-icon, .ui-icon-searchfield:after {
+    background: none;
+}
+
+.ui-loader .ui-icon {
+    background-color: transparent;
+    background: url(../img/ajax-loader.gif);
+    background-size: 40px 40px;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    opacity: 1;
+}
+
+.ui-icon-arrow-d {
+    background-image: url(../img/ic_forward.png);
+    background-size: 100% 100%;
+    width: 24px;
+    height: 24px;
+}
+
+.input .ui-btn-inner {
+    padding: 0;
+    height: 48px;
+}
+
+.ui-select .ui-btn-icon-right .ui-icon {
+    margin-top: -10px;
+    right: 12px;
+}
+
+.money {
+    background-color: #f7f7f7;
+    height: 36px;
+    position: relative;
+}
+
+.money-desc img {
+    float: left;
+    height: 12px;
+    width: 12px;
+    margin-top: 2px;
+    margin-right: 6px;
+
+}
+
+.att-word {
+    margin-top: 12px;
+    line-height: 16px;
+    font-size: 13px;
+    right: 14px;
+}
+
+.certain h3 {
+    margin-top: 28px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    width: 374px;
+    height: 34px;
+    padding-top: 12px;
+}
+
+.ui-checkbox input, .ui-radio input {
+    position: absolute;
+    right: 20px;
+    left: 90%;
+    top: 22px;
+    width: 20px;
+    height: 20px;
+    margin: -5px 0 0 0;
+    outline: 0 !important;
+    z-index: 1;
+}
+
+/* 提现 */
+.price-section {
+    position: relative;
+    background-color: #fff;
+    padding: .4rem .4rem;
+    overflow: hidden;
+}
+
+.price-list li {
+    float: left;
+    width: 33.3333%;
+}
+
+.price-list li .li-box {
+    margin: 0.2rem;
+    color: #666;
+    display: block;
+    background-color: white;
+    border: 1px solid #777;
+    text-decoration: none;
+    border-radius: 3px;
+    height: 56px;
+    position: relative;
+}
+
+.price-list li.active .li-box {
+    color: #fff;
+    background-color: #f23030;
+    border-color: #f23030;
+    font-size: 0;
+    line-height: 1;
+}
+
+.price-list .price-useless .li-box {
+    color: #dadce5;
+    border-color: #dadce5;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.price-list .price-useless .li-box .old {
+    color: #dadce5;
+    border-color: #dadce5;
+    font-weight: 400;
+    line-height: 1;
+    margin-top: 20px;
+}
+
+.price-list li .li-box .old {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+.price-list li .li-box .old, .price-list li .li-box {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.price-list .price-active .li-box {
+    background-color: #ff4c5b;
+    color: white;
+    border-color: #ff4c5b;
+}
+
+.ui-select .ui-btn-text {
+    font-size: 16px;
+    color: #b2b2b2;
+    top: 18px;
+    text-align: right;
+}
+
+/*div-overflow*/
+.ui-mobile-viewport-transitioning, .ui-mobile-viewport-transitioning .ui-page {
+    height: 110%;
+}

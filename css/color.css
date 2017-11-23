@@ -1,0 +1,29 @@
+.color1 {
+
+    color: #131b40; /*主-黑色字*/
+}
+
+.color2 {
+    color: #b2b2b2; /*次-灰色字*/
+}
+
+.color3 {
+    color: #ededed;
+    /*color:#dadce5;    /*线色*/
+}
+
+.defcolor {
+    color: #ff4c5b; /*主题字色*/
+}
+
+.bgcolor1 {
+    background-color: #ff4d5b; /*主题背景色*/
+}
+
+.bgcolor2 {
+    background-color: #ededed; /*背景色*/
+}
+
+.borcolor {
+    background-color: #b8bbcc; /*虚线色*/
+}

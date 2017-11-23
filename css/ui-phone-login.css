@@ -1,0 +1,243 @@
+.phone-intro {
+    text-align: -webkit-center;
+    margin-top: 16px;
+}
+
+.inpu6 {
+    background-color: white;
+    height: 52px;
+}
+
+.input6 .ui-btn {
+    top: 168px;
+    z-index: 100;
+    position: absolute;
+    text-align: center;
+    right: 8%;
+    margin-top: 6px;
+    background-color: #39e6d7;
+    background-image: none;
+    color: white;
+    border-radius: 3px;
+    width: 96px;
+    height: 28px;
+    padding-top: 8px;
+    box-shadow: none;
+    border: 0;
+}
+
+.input6 .ui-btn-inner {
+    border: 0;
+    padding: 0;
+    font-size: 16px;
+    text-shadow: none;
+    padding-top: 3px;
+}
+
+.input6 .ui-btn-text {
+    top: 0;
+    font-size: 14px;
+}
+
+.input6 .ui-input-text {
+    background-color: white;
+    width: 82%;
+    height: 47px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    margin: 16px auto 0 auto;
+    padding-left: 16px;
+    padding-top: 2px;
+}
+
+.phone-intro h2 {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.phone-code-active {
+    background-color: #ddd;
+    color: #b2b2b2;
+}
+
+.phone-certain h3 {
+    margin-top: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    width: 87.5%;
+    height: 34px;
+    padding-top: 12px;
+}
+
+.input1 .ui-input-text {
+    background-color: white;
+    width: 82%;
+    height: 48px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    margin: 16px auto 0 auto;
+    padding-left: 16px;
+}
+
+.input_agent .ui-input-text {
+    border: 1px solid #ededed;
+    background-color: white;
+    width: 73%;
+    height: 48px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    margin: 40px auto 0 auto;
+    padding-left: 16px;
+}
+
+.input_agent .ui-input-text .ui-body-c {
+    padding-top: 9px;
+}
+
+.input_agent1 .ui-input-text .ui-body-c {
+    padding-top: 9px;
+}
+
+.input3 .ui-input-text .ui-body-c {
+    width: 161px;
+    padding-top: 9px;
+}
+
+.input6 .ui-input-text .ui-body-c {
+    width: 161px;
+    padding-top: 9px;
+}
+
+.input .ui-input-text .ui-body-c {
+    width: 161px;
+    padding-top: 7px;
+}
+
+.input_agent1 .ui-btn {
+    top: 0px;
+    z-index: 100;
+    position: absolute;
+    text-align: center;
+    right: 12%;
+    margin-top: 6px;
+    background-color: #39e6d7;
+    background-image: none;
+    color: white;
+    border-radius: 3px;
+    width: 96px;
+    height: 28px;
+    padding-top: 8px;
+    box-shadow: none;
+    border: 0;
+}
+
+.input_agent1 .ui-btn-inner {
+    border: 0;
+    padding: 0;
+    font-size: 16px;
+    text-shadow: none;
+    padding-top: 3px;
+}
+
+.input_agent1 .ui-btn-text {
+    top: 0;
+    font-size: 14px;
+}
+
+.input_agent1 .ui-input-text {
+    border: 1px solid #ededed;
+    background-color: white;
+    width: 73%;
+    height: 48px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    margin: 16px auto 0 auto;
+    padding-left: 16px;
+}
+
+.login_certain h3 {
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    width: 80%;
+    height: 34px;
+    padding-top: 12px;
+}
+
+.apply_agent h3 {
+    background-color: #dedede;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: #999;
+    border-radius: 6px;
+    width: 80%;
+    height: 34px;
+    padding-top: 12px;
+}
+
+.input3 {
+    position: relative;
+    background-color: white;
+    height: 52px;
+}
+
+.input3 .ui-btn {
+    top: 8px;
+    z-index: 100;
+    position: absolute;
+    text-align: center;
+    right: 8px;
+    margin-top: 0;
+    background-color: #39e6d7;
+    background-image: none;
+    color: white;
+    border-radius: 3px;
+    width: 96px;
+    height: 28px;
+    padding-top: 8px;
+    box-shadow: none;
+    border: 0;
+}
+
+.getmoney-btn-disabled .ui-btn {
+    opacity: 1;
+    background-color: #ddd;
+    color: #b2b2b2;
+    box-shadow: none;
+}
+
+.input3 .ui-btn-inner {
+    margin-top: 3px;
+    border: 0;
+    padding: 0;
+    font-size: 16px;
+    text-shadow: none;
+}
+
+.input3 .ui-btn-text {
+    top: 0;
+    font-size: 14px;
+}
+
+.input3 .ui-input-text {
+    background-color: white;
+    width: 82%;
+    height: 48px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    padding-left: 16px;
+    padding-top: 2px;
+}

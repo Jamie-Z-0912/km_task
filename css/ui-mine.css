@@ -1,0 +1,114 @@
+/* 个人中心界面样式 */
+.income-desc {
+    font-size: 17px;
+    font-weight: normal;
+    color: white;
+    margin-top: 0;
+    margin-left: 16px;
+    padding-top: 18px;
+    margin-bottom: 0;
+}
+
+.income-number {
+    font-size: 62px;
+    font-weight: 400;
+    color: white;
+    margin-top: -6px;
+    margin-left: 16px;
+    margin-bottom: 18px;
+}
+
+#agent_sons {
+    font-weight: 400;
+    color: white;
+    opacity: 0.7;
+    margin-left: 16px;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+#agent_all_income {
+    font-weight: 400;
+    color: white;
+    opacity: 0.7;
+    margin-left: 16px;
+    margin-top: -1px;
+    margin-bottom: 0;
+}
+
+#user_yue {
+    font-weight: 400;
+    color: white;
+    opacity: 0.7;
+    margin-left: 16px;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+#user_all_income {
+    font-weight: 400;
+    color: white;
+    opacity: 0.7;
+    margin-left: 16px;
+    margin-top: -1px;
+    margin-bottom: 0;
+}
+
+.out-desc {
+    position: absolute;
+    width: 40px;
+    right: 20px;
+    top: 2px;
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
+    opacity: 0.5;
+}
+
+.mine-money {
+    /*background-image:url(../img/bg_mine.png);*/
+    /*background-size:100% 100%;*/
+    background: -webkit-linear-gradient(top left, #ff6680, #ff4043);
+    background: linear-gradient(top left, #ff6680, #ff4043);
+    height: 188px;
+}
+
+.footer {
+    position: relative;
+    float: left;
+    display: block;
+    width: 33.333333%;
+    height: 48px;
+    text-align: center;
+}
+
+.tab-icon img {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    padding-top: 11px;
+    right: 55%;
+}
+
+.tab-desc {
+    position: absolute;
+    top: 12px;
+    left: 46%;
+}
+
+.mine-forward img {
+    height: 24px;
+    width: 24px;
+    top: 20px;
+    float: right;
+}
+
+.money-out {
+    position: absolute;
+    right: 12px;
+    margin-top: -31px;
+}
+
+.ui-body-c, .ui-overlay-c {
+    text-shadow: none;
+}

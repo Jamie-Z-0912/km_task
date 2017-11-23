@@ -1,0 +1,20 @@
+.list {
+    height: 68px
+}
+
+.user-icon {
+    float: left;
+    position: absolute;
+}
+
+.user-icon img {
+    height: 44px;
+    width: 44px;
+    margin-left: 16px;
+    margin-top: 12px;
+}
+
+.user-desc {
+    margin-left: 74px;
+    float: left;
+}

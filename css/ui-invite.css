@@ -1,0 +1,125 @@
+/* 邀请界面样式 */
+.tab-desc {
+    position: absolute;
+    top: 12px;
+    left: 46%;
+}
+
+.cell {
+    height: 51px;
+}
+
+.cell img {
+    height: 16px;
+    width: 16px;
+    margin-top: 17px;
+    margin-left: 16px;
+}
+
+.cell5 {
+    height: 52px;
+}
+
+.cell5 img {
+    height: 20px;
+    width: 20px;
+    margin-top: 16px;
+    margin-left: 16px;
+}
+
+.cell-desc {
+    position: absolute;
+    left: 0;
+    margin-top: 14px;
+    margin-left: 44px;
+}
+
+.cell-day {
+    font-size: 15px;
+    font-weight: 400;
+    position: absolute;
+    left: 0;
+    margin-top: 15px;
+    margin-left: 16px;
+}
+
+.cell-reward {
+    font-size: 18px;
+    font-weight: 400;
+    float: right;
+    position: absolute;
+    right: 16px;
+    margin-top: 12px;
+}
+
+.cell-desc5 {
+    position: absolute;
+    left: 0;
+    margin-top: 14px;
+    margin-left: 48px;
+}
+
+.cell-intro5 {
+    font-size: 14px;
+    font-weight: 400;
+    float: right;
+    position: absolute;
+    right: 36px;
+    margin-top: 16px;
+}
+
+.cell-intro {
+    font-size: 15px;
+    font-weight: 400;
+    float: right;
+    position: absolute;
+    right: 36px;
+    margin-top: 15px;
+}
+
+.cell-forward img {
+    float: right;
+    margin-right: 12px;
+    margin-top: 14px;
+    height: 24px;
+    width: 24px;
+}
+
+.invite-desc {
+    /*background: url("../img/bg_mission_arrow.png") no-repeat bottom #fff;*/
+    /*background-size: 100%;*/
+    /*line-height: 20px;*/
+    /*padding-top: 16px;*/
+    /*padding-left: 16px;*/
+    /*padding-right: 14px;*/
+    /*padding-bottom:32px;*/
+    /*font-weight:400;*/
+    padding: 24px;
+    color: #999;
+    font-size: 14px;
+    margin-top: 64px;
+}
+
+.invite-code {
+    height: 220px;
+    width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 16px;
+    border: 2px dashed #b8bbcc;
+}
+
+.img-code {
+    display: none;
+}
+
+.my_code {
+    position: relative;
+    width: 84%;
+    left: 8%;
+    padding-top: 16px;
+}
+
+.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
+    font-family: PingFang SC;
+}

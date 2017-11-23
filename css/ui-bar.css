@@ -1,0 +1,118 @@
+/* h5工具栏、导航栏样式 */
+.ui-bar-f {
+    background-color: #ff4d5b; /* 主题色 */
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    text-shadow: none;
+}
+
+.ui-btn-icon-top .ui-btn-inner .ui-icon, .ui-btn-icon-bottom .ui-btn-inner .ui-icon {
+    position: absolute;
+    left: 50%;
+    margin-left: -12px;
+}
+
+.ui-btn-active:hover {
+    color: black;
+}
+
+.ui-btn-active:visited, .ui-btn-active a.ui-link-inherit {
+    color: #ff4d5b;
+}
+
+.ui-bar-g {
+    background-color: white;
+    color: #131b40; /* 主字体色 */
+    font-size: 14px;
+    font-weight: 400;
+    height: 50px;
+}
+
+.ui-navbar ul {
+    background-color: white;
+}
+
+.ui-icon {
+    font-weight: 200;
+    font-family: Tabicons;
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    box-shadow: none;
+}
+
+.ui-btn-active {
+    color: #ff4d5b;
+    background-color: white;
+    text-shadow: none;
+    background-image: none;
+    border: 0;
+}
+
+.ui-btn-text {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 15px;
+}
+
+@font-face {
+    font-family: Tabicons;
+    font-weight: normal;
+    font-style: normal;
+    src: url('../tab.ttf') format('truetype');
+}
+
+.ui-icon-home:before {
+    content: '\e003';
+    background-position-y: 0px;
+}
+
+.ui-icon-invite:before {
+    content: '\e002';
+    background-position-y: 0px;
+}
+
+.ui-icon-mine:before {
+    content: '\e001';
+    background-position-y: 0px;
+}
+
+.item-line {
+    height: 1px;
+    background-color: #ededed; /* 背景&线颜色 */
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+    font-size: 17px;
+    display: block;
+    margin: .7em 30% .8em;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*.ui-header-fixed.ui-fixed-hidden {*/
+/*    position:fixed;*/
+/*    top:0;*/
+/*    padding-top:0;*/
+/*}*/
+
+.ui-footer-fixed.ui-fixed-hidden {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 0;
+}
+
+.ui-listview .ui-li-divider {
+    background-color: #f0f0f0;
+    background-image: none;
+    text-shadow: none;
+    box-shadow: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: #a6a6a6;
+    padding-top: 8px;
+}
