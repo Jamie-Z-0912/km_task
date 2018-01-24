@@ -1,0 +1,6 @@
+.pl0{padding-left: 0px !important;}
+.avatar{width: 40px;height:0px;display:inline-block;vertical-align:middle;position:relative;}
+.avatar img{display: none;width: 40px; border-radius: 50%;position: absolute;top:0;margin-top: -54%;left:0;}
+table.table tr td.sub_block *{display: block;}
+table.table tr td.sub_block img{ max-width: 100%;}
+table.table tr td{word-break: break-word;}

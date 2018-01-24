@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+    <task:scheduler id="suishenScheduler" pool-size="16"/>
+    <task:scheduled-tasks scheduler="suishenScheduler">
+        <!--自动推送系统消息，每隔5min执行一次-->
+        <task:scheduled ref="systemMsgsService" method="autoPush" cron="0 0/5 * * * ?"/>
+
+        <!--统计分享邀请活动,每天早晨7点30执行-->
+        <task:scheduled ref="statsShareInviteActService" method="doStatsJob" cron="0 30 7 * * ?"/>
+
+        <!--自动更新分享任务阅读数据，每隔10min执行一次-->
+        <task:scheduled ref="taskService" method="taskAutoUpdate" cron="0 0/10 * * * ?"/>
+
+        <!--抓取实时文章,每小时1次-->
+        <task:scheduled ref="realTimeArticleService" method="fetchAndSaveTopNewsJob" cron="0 0/60 * * * ?"/>
+
+        <!--自动审核1元提现订单 每隔2min-->
+        <task:scheduled ref="duiBaOrderService" method="autoHandleWaitVerifyOneYuanDuibaOrdersJob" cron="0 0/2 * * * ?"/>
+
+        <!--自动审核提现/充值订单 工作日下午4点-->
+        <task:scheduled ref="duiBaOrderService" method="autoHandleWaitVerifyDuibaOrdersJob" cron="0 0/10 * * * ?"/>
+
+        <!--处理提现中/异常订单,每隔60min-->
+        <task:scheduled ref="duiBaOrderService" method="autoHandleProcessDuibaOrdersJob" cron="0 0/60 * * * ?"/>
+
+        <!--监控告警，每隔30min执行一次-->
+        <task:scheduled ref="monitorService" method="jobQueueSizeMonitor" cron="0 0/30 * * * ?"/>
+    </task:scheduled-tasks>
+</beans>
