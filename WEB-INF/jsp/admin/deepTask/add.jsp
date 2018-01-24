@@ -315,9 +315,8 @@
         });
         $('.fac_rule').on('change', function(){
             var _self = $(this),
-                $par = $(this).parents('.form-control'),
-                $desc = $par.find('.fac_desc');
-            $desc.val(_self.find("option:selected").text());
+                $par = $(this).parents('.form-group');
+            $par.find('.fac_desc').val(_self.find("option:selected").text());
         })
         function isEmpty(val,txt){
             if($.trim(val) == ''){

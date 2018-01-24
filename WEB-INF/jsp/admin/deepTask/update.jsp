@@ -346,7 +346,6 @@
         $('.fac_rule').on('change', function(){
             var _self = $(this),
                 $par = $(this).parents('.form-group');
-            console.log(_self.find("option:selected").text());
             $par.find('.fac_desc').val(_self.find("option:selected").text());
         })
         function isEmpty(val,txt){
