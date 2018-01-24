@@ -8,10 +8,7 @@
 <div id="main-content" class="clearfix">
 	<div id="page-content" class="clearfix">
 		<div class="page-header position-relative">
-			<h1>系统配置管理(注意:所有配置修改完1min后生效)
-			<a href="admin/systemSetting/add" class="btn btn-success btn-small"
-                               style="float: right"> <i class="icon-edit"></i>新增配置项</a>
-			</h1>
+			<h1>配置管理(注意:所有配置项修改完后1min生效)
 		</div>
 		<div class="row-fluid">
 			<div class="row-fluid">
@@ -32,6 +29,7 @@
                         <button class="btn btn-info" type="submit">
                             <i class="icon-ok"></i> 查询
                         </button>
+                        <a href="admin/systemSetting/add" class="btn btn-success btn-info" > <i class="icon-edit"></i>新增</a>
                     </div>
                 </form>
                 <table class="table table-bordered table-striped" style="table-layout:fixed; word-break: break-all;">
@@ -69,7 +67,6 @@
 <jsp:include page="../foot.jsp" />
 </body>
 <script>
-$("#menu_monitor").addClass('active open');//左侧导航栏选中状态
-$("#submenu_config").addClass('active');//左侧导航栏选中状态
+$("#menu_config").addClass('active');//左侧导航栏选中状态
 </script>
 </html>

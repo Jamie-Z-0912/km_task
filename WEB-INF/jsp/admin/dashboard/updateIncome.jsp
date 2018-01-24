@@ -134,6 +134,12 @@
                         </div>
                     </div>
                     <div class="control-group">
+                        <label class="control-label">众智嘉能</label>
+                        <div class="controls">
+                            <input type="text" id="zzjnIncome" name="zzjnIncome" class="input-xlarge" value="${statsIncome.zzjnIncome}"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <label class="control-label">其他</label>
                         <div class="controls">
                             <input type="text" id="otherIncome" name="otherIncome" class="input-xlarge" value="${statsIncome.otherIncome}"/>

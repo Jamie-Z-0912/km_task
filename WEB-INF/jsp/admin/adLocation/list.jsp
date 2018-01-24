@@ -36,17 +36,15 @@
 				<table class="table table-bordered table-striped" style="table-layout:fixed; word-break: break-all;">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>应用</th>
-							<th>广告位</th>
+							<th width="5%">ID</th>
+							<th width="20%">广告位</th>
 							<th>图片</th>
-                            <th>状态</th>
+                            <th>支持应用</th>
                             <th>支持设备</th>
                             <th>支持版本</th>
                             <th>支持布局</th>
                             <th>支持渠道</th>
-							<th>添加时间</th>
-                            <th>修改时间</th>
+                            <th>最后修改时间</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -54,26 +52,24 @@
 						<c:forEach items="${list}" var="adLocation" varStatus="st">
 							<tr>
 								<td>${adLocation.id}</td>
-				                <td>
-				                    <c:if test="${adLocation.application == ''}">
-                                        默认
-                                    </c:if>
-                                    <c:if test="${adLocation.application != ''}">
-                                        ${adLocation.application}
-                                    </c:if>
-                                </td>
                                 <td>
-                                    ${adLocation.desc}
+                                    名称: ${adLocation.desc}</br>
+                                    状态: <c:if test="${adLocation.status == 1}">
+                                            正常
+                                        </c:if>
+                                        <c:if test="${adLocation.status == 0}">
+                                            <font color="red">删除</font>
+                                        </c:if>
                                 </td>
                                 <td>
                                     <img src="${adLocation.img}" style="width: 180px;" />
                                 </td>
                                 <td>
-                                    <c:if test="${adLocation.status == 1}">
-                                        正常
+                                    <c:if test="${adLocation.application == ''}">
+                                        所有
                                     </c:if>
-                                    <c:if test="${adLocation.status == 0}">
-                                        删除
+                                    <c:if test="${adLocation.application != ''}">
+                                        ${adLocation.application}
                                     </c:if>
                                 </td>
                                 <td>
@@ -88,7 +84,6 @@
                                 <td>
                                     ${adLocation.adsType}
                                 </td>
-								<td><suishen_fmt:formatDate value="${adLocation.addedTime}" /></td>
                                 <td><suishen_fmt:formatDate value="${adLocation.updateTime}" /></td>
 								<td>
                                     <a class="set_top update" href="admin/adLocation/update?id=${adLocation.id}" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>编辑</span></span></a><br/>

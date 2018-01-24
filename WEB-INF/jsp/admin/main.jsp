@@ -38,7 +38,7 @@
                             <th width="5%">日期</th>
                             <th width="10%">总有效阅读数</th>
                             <th width="10%">总收入</th>
-                            <th width="15%">总花费(金币兑换)</th>
+                            <th width="15%">总花费(市场花费+应用内花费)</th>
                             <th width="15%">提现支出(提现+充值)</th>
                             <th width="15%">单次有效阅读收入</th>
                             <th width="10%">PV</th>
@@ -57,7 +57,7 @@
                                 </c:if>
                                 <td>${statsSummary.articleValidReadNum}</td>
                                 <td>${statsSummary.totalIncome}</td>
-                                <td>${statsSummary.totalCoinCost}</td>
+                                <td><suishen_fmt:formatNumber value="${statsSummary.totalCoinCost + statsSummary.marketCost}"/></td>
                                 <td>${statsSummary.czCost + statsSummary.withdrawCost}</td>
                                 <td>${statsSummary.oneArticleValidReadIncome}</td>
                                 <td>${statsSummary.articleDetailsViewNum}</td>
@@ -67,6 +67,8 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    Note:<br/>
+                    提现支出: 当日成功处理的提现+充值订单总金额(不包含手续费)
                 </div>
         </div>
     </div>

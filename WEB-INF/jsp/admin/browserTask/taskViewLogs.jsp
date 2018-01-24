@@ -28,9 +28,46 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">用户唯一标识:</label>
+                    <label class="control-label">时间<br />
+                    </label>
                     <div class="controls">
-                        <input type="text" id="cookieV" name="cookieV" value="${cookieV}" class="input-xlarge" maxlength="100"/>
+                        <input type="text" id="startTime" data-oval="" class="start_time input-xlarge" />
+                        <input type="hidden" name="startTime" id="start_time_hidden" />
+                        -
+                        <input type="text" id="endTime" data-oval="" class="start_time input-xlarge" />
+                        <input type="hidden" name="endTime" id="end_time_hidden" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">是否有效:</label>
+                    <div class="controls">
+                        <select name="isValid" id="isValid" style="width: 120px;">
+                            <option value="-1" <c:if test="${-1 == isValid}">selected</c:if>>所有</option>
+                            <option value="0" <c:if test="${0 == isValid}">selected</c:if>>否</option>
+                            <option value="1" <c:if test="${1 == isValid}">selected</c:if>>是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">无效原因</label>
+                    <div class="controls">
+                        <select name="invalidReason" id="invalidReason" style="width: 120px;">
+                            <option value="0" <c:if test="${0 == invalidReason}">selected</c:if>>所有</option>
+                            <option value="1" <c:if test="${1 == invalidReason}">selected</c:if>>浏览时任务状态异常(任务下架等)</option>
+                            <option value="2" <c:if test="${2 == invalidReason}">selected</c:if>>浏览时任务已结束(售完或到期)</option>
+                            <option value="3" <c:if test="${3 == invalidReason}">selected</c:if>>任务没有被分享</option>
+                            <option value="4" <c:if test="${4 == invalidReason}">selected</c:if>>非移动设备浏览</option>
+                            <option value="5" <c:if test="${5 == invalidReason}">selected</c:if>>阅读平台非qq微信微博qq空间或与投放的计费方式不匹配</option>
+                            <option value="6" <c:if test="${6 == invalidReason}">selected</c:if>>无效的Cookie,疑似作弊</option>
+                            <option value="7" <c:if test="${7 == invalidReason}">selected</c:if>>单用户单任务单ip限制10次有效阅读</option>
+                            <option value="8" <c:if test="${8 == invalidReason}">selected</c:if>>单任务单ip限制100次有效阅读</option>
+                            <option value="10" <c:if test="${10 == invalidReason}">selected</c:if>>浏览时任务订单已过期</option>
+                            <option value="11" <c:if test="${11 == invalidReason}">selected</c:if>>浏览时任务订单状态异常</option>
+                            <option value="12" <c:if test="${12 == invalidReason}">selected</c:if>>该指纹设备已经浏览过此任务</option>
+                            <option value="13" <c:if test="${13 == invalidReason}">selected</c:if>>此次浏览缺少设备指纹</option>
+                            <option value="14" <c:if test="${14 == invalidReason}">selected</c:if>>单用户每日有效阅读上限200次</option>
+                            <option value="15" <c:if test="${15 == invalidReason}">selected</c:if>>该Cookie已经浏览过此任务</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-actions">
@@ -42,15 +79,11 @@
             <table class="table table-bordered" style="table-layout:fixed; word-break: break-all;">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th width="5%">id</th>
                         <th>uid</th>
-                        <th>taskId</th>
+                        <th width="8%">任务ID</th>
                         <th>结算方式</th>
-                        <th>唯一标识</th>
-                        <th>ip</th>
-                        <th>城市</th>
-                        <th>设备类型</th>
-                        <th>阅读平台</th>
+                        <th width="15%">浏览者信息</th>
                         <th>阅读次数</th>
                         <th>是否有效阅读</th>
                         <th>无效原因</th>
@@ -76,24 +109,15 @@
                                 </c:forEach>
                             </td>
                             <td>
-                                ${tvl.cookie}
-                            </td>
-                            <td>
-                                ${tvl.ip}
-                            </td>
-                            <td>
-                                ${tvl.city}
-                            </td>
-                            <!--<td>${tvl.userAgent}</td>-->
-                            <td>
-                                ${tvl.devicePlatform}
-                            </td>
-                            <td>
-                                <c:forEach items="${sharePlatform}" var="sp" varStatus="st">
-                                    <c:if test="${sp.platform == tvl.platform}">
-                                        ${sp.desc}
-                                    </c:if>
-                                </c:forEach>
+                                ip: ${tvl.ip}</br>
+                                城市: ${tvl.city}</br>
+                                设备类型: ${tvl.devicePlatform}</br>
+                                阅读平台: <c:forEach items="${sharePlatform}" var="sp" varStatus="st">
+                                          <c:if test="${sp.platform == tvl.platform}">
+                                              ${sp.desc}
+                                          </c:if>
+                                      </c:forEach></br>
+                                唯一标识: ${tvl.cookie}</br>
                             </td>
                             <td>
                                 ${tvl.num}
@@ -123,65 +147,47 @@
                         </c:forEach>
                     </tbody>
             </table>
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="dataTables_paginate paging_bootstrap pagination">
-                    ${total}条记录共<b>${totalPage}</b>页
+            <!-- 分页 -->
+            <div class="widget-box" style="margin-top: -10px;">
+                <div class="widget-header">
+                    <div class="dataTables_info dataTables_paginate paging_bootstrap pagination" style="margin-top: 5px; ">
                         <ul>
+                            <li class="prev">
+                                <span class="previous fg-button ui-button ui-state-default ui-state-disabled">${total}条记录, 共${totalPage}页, 当前第${page}页</span>
+                            </li>
                             <c:choose>
-                                <c:when test="${page gt 1}">
-                                    <li><a
-                                        href="admin/viewLogs?page=${page-1}&uid=${uid}&taskId=${taskId}&cookieV=${cookieV}&startTime=${startTime}&endTime=${endTime}">&lt;&lt;</a></li>
+                                <c:when test="${page!=1}">
+                                    <li class="prev">
+                                        <a href="javascript:turnPage(1)" title="首页" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-default"><span>首页</span></a>
+                                        <a href="javascript:turnPage(${page-1})" title="上一页" class="previous fg-button ui-button ui-state-default ui-state-default"><span>上一页</span></a>
+                                    </li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li class="prev disabled"><a href="javascript:void(0);">&lt;&lt;</a></li>
+                                    <li class="prev">
+                                        <span class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">首页</span>
+                                        <span class="previous fg-button ui-button ui-state-default ui-state-disabled">上一页</span>
+                                    </li>
                                 </c:otherwise>
                             </c:choose>
-
                             <c:choose>
-                                <c:when test="${page gt 1}">
-                                    <li><a
-                                        href="admin/viewLogs?page=1&uid=${uid}&taskId=${taskId}&cookieV=${cookieV}&startTime=${startTime}&endTime=${endTime}">1</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li class="prev disabled"><a href="javascript:void(0);">1</a></li>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${totalPage ge 2 and page ne 2}">
-                                    <li><a
-                                        href="admin/viewLogs?page=2&uid=${uid}&taskId=${taskId}&cookieV=${cookieV}&startTime=${startTime}&endTime=${endTime}">2</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li class="prev disabled"><a href="javascript:void(0);">2</a></li>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${totalPage ge 3 and page ne 3}">
-                                    <li class=""><a
-                                            href="admin/viewLogs?page=3&uid=${uid}&taskId=${taskId}&cookieV=${cookieV}&startTime=${startTime}&endTime=${endTime}">3</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li class="prev disabled"><a href="javascript:void(0);">3</a></li>
-                                </c:otherwise>
-                            </c:choose>
-
-                            <c:choose>
-                                <c:when test="${page lt totalPage}">
-                                    <li class="next"><a
-                                        href="admin/viewLogs?page=${page+1}&uid=${uid}&taskId=${taskId}&cookieV=${cookieV}&startTime=${startTime}&endTime=${endTime}">&gt;&gt;</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li class="prev disabled"><a href="javascript:void(0);">&gt;&gt;</a></li>
-                                </c:otherwise>
+                                 <c:when test="${page!=totalPage}">
+                                    <li class="next">
+                                        <a href="javascript:turnPage(${page+1})" title="下一页" class="next fg-button ui-button ui-state-default"><span>下一页</span></a>
+                                        <a href="javascript:turnPage(${totalPage})" title="末页" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default"><span>末页</span></a>
+                                    </li>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <li class="next">
+                                        <span class="next fg-button ui-button ui-state-default ui-state-disabled">下一页</span>
+                                        <span class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">末页</span>
+                                    </li>
+                                 </c:otherwise>
                             </c:choose>
                         </ul>
-                        每页<b>${pageSize}</b>条
-                    </div>
+                     </div>
                 </div>
             </div>
+            <!-- 分页 -->
         </div>
 	</div>
 </div>
@@ -214,6 +220,12 @@ function gx(){
     var end = new Date($("#endTime").val().replace(/-/g,   "/")).getTime();
     $("#start_time_hidden").val(start);
     $("#end_time_hidden").val(end);
+}
+
+function turnPage(page) {
+	// 分页列表URL
+	var href = "admin/viewLogs?uid=${uid}&taskId=${taskId}&startTime=${startTime}&endTime=${endTime}&page=" + page;
+	window.location.href = href;
 }
 </script>
 </html>

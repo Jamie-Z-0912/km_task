@@ -72,18 +72,14 @@
 				<table class="table table-bordered table-striped" style="table-layout:fixed; word-break: break-all;">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th width="5%">ID</th>
+							<th width="25%">广告位</th>
 							<th>应用</th>
-							<th>广告位</th>
-                            <th>平台</th>
-                            <th>版本</th>
+                            <th>设备平台</th>
+                            <th>版本号</th>
                             <th>广告布局</th>
-                            <th>广告渠道</th>
-                            <th>第三方授权AppID</th>
-                            <th>第三方广告位ID</th>
-							<th>添加时间</th>
-                            <th>修改时间</th>
                             <th>状态</th>
+                            <th>最后修改时间</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -92,10 +88,15 @@
 							<tr>
 								<td>${alc.id}</td>
                                 <td>
-                                    ${alc.application}
+                                    名称: ${alc.locationDesc}</br>
+                                    渠道: <c:forEach items="${adChannels}" var="adc" varStatus="st">
+                                                  <c:if test="${adc.type == alc.adsType}">${adc.desc}</c:if>
+                                             </c:forEach></br>
+                                    第三方AppID: ${alc.adAppId}</br>
+                                    第三方广告位ID: ${alc.thirdLocationId}</br>
                                 </td>
                                 <td>
-                                    ${alc.locationDesc}
+                                    ${alc.application}
                                 </td>
                                 <td>
                                     ${alc.platform}
@@ -109,22 +110,10 @@
                                     </c:forEach>
                                 </td>
                                 <td>
-                                    <c:forEach items="${adChannels}" var="adc" varStatus="st">
-                                        <c:if test="${adc.type == alc.adsType}">${adc.desc}</c:if>
-                                    </c:forEach>
-                                </td>
-                                <td>
-                                    ${alc.adAppId}
-                                </td>
-                                <td>
-                                    ${alc.thirdLocationId}
-                                </td>
-								<td><suishen_fmt:formatDate value="${alc.addedTime}" /></td>
-                                <td><suishen_fmt:formatDate value="${alc.updateTime}" /></td>
-                                <td>
                                     <c:if test="${alc.status == 1}">打开中</c:if>
                                     <c:if test="${alc.status == 0}">关闭中</c:if>
                                 </td>
+                                <td><suishen_fmt:formatDate value="${alc.updateTime}" /></td>
                                 <td>
                                     <a class="set_top update" href="admin/adLocationConfig/update?id=${alc.id}" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>编辑</span></span></a><br/>
                                     <c:if test="${alc.status == 0}">

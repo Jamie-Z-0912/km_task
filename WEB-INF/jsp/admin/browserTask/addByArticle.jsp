@@ -79,6 +79,17 @@
                 </div>
 
                 <div class="control-group">
+                    <label class="control-label">分享方式</label>
+                    <div class="controls">
+                        <select name="share_method" id="share_method" style="width: 180px;">
+                            <c:forEach items="${shareMethods}" var="sm" varStatus="st">
+                                <option value="${sm}" <c:if test="${sm == task.shareMethod}">selected</c:if>>${sm.desc}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
                     <label class="control-label">分享内容原始链接</label>
                     <div class="controls">
                         <input type="text"  id="origin_url" name="origin_url" class="input-xxlarge" value="${article.url}"/>

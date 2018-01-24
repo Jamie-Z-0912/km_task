@@ -34,6 +34,12 @@
                          </select>
                      </div>
                   </div>
+                <div class="control-group">
+                    <label class="control-label">关键字</label>
+                    <div class="controls">
+                        <input type="text" id="keyword" name = "keyword" width="100px" value=""/>
+                    </div>
+                </div>
                   <div class="control-group">
                        <label class="control-label">文章抓取时间</label>
                        <div class="controls">
@@ -54,19 +60,16 @@
 				<table class="table table-bordered table-striped" style="table-layout:fixed; word-break: break-all;">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th>文章ID</th>
                             <th>分类</th>
 							<th>标题</th>
                             <th>图片</th>
-                            <th>状态</th>
                             <th>来源</th>
                             <th>布局</th>
-                            <th>投放城市</th>
                             <th>发布时间</th>
-                            <th>浏览次数</th>
-                            <th>评论次数</th>
-							<th>添加时间</th>
-							<th>修改时间</th>
+							<th>最后操作时间</th>
+							<th>状态</th>
+                            <th>统计</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -84,10 +87,6 @@
 								    <img src="${art.imagesList[0]}" />
                                 </td>
                                 <td>
-                                    <c:if test="${art.status == 0}">删除</c:if>
-                                    <c:if test="${art.status == 1}">正常</c:if>
-                                </td>
-                                <td>
                                     <a class="set_top update" href="${art.originUrl}">${art.source}</a>
                                 </td>
                                 <td>
@@ -96,20 +95,17 @@
                                     </c:forEach>
                                 </td>
                                 <td>
-                                    <c:if test="${art.city == ''}">全国</c:if>
-                                    <c:if test="${art.city != ''}">${art.city}</c:if>
-                                </td>
-                                <td>
                                     ${art.pubTime}
                                 </td>
-                                <td>
-                                    ${art.viewNum}
-                                </td>
-                                <td>
-                                    ${art.commentNum}
-                                </td>
-								<td><suishen_fmt:formatDate value="${art.addedTime}" /></td>
                                 <td><suishen_fmt:formatDate value="${art.updateTime}" /></td>
+                                <td>
+                                    <c:if test="${art.status == 0}">删除</c:if>
+                                    <c:if test="${art.status == 1}">正常</c:if>
+                                </td>
+                                <td>
+                                    浏览数: ${art.viewNum}</br>
+                                    评论数: ${art.commentNum}
+                                </td>
 								<td>
                                     <c:if test="${art.status == 0}">
                                         <a class="set_top update" href="admin/article/${art.id}?status=1" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>恢复</span></span></a><br/>
@@ -117,7 +113,6 @@
                                     <c:if test="${art.status == 1}">
                                         <a class="set_top update" href="admin/article/${art.id}?status=0" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>下架</span></span></a><br/>
                                     </c:if>
-                                    <a class="set_top update" href="admin/article/addShareTask?articleId=${art.id}" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>+现金任务</span></span></a><br/>
                                     <a class="set_top update" href="admin/article/addCoinShareTask?articleId=${art.id}" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>+金币任务</span></span></a><br/>
                                     <a class="set_top update" href="admin/msg/push?type=article&id=${art.id}&platform=DEFAULT" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>推送</span></span></a><br/>
                                     <c:if test="${art.commentNum > 0}">

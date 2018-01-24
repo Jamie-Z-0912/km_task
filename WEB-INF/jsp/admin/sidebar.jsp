@@ -9,13 +9,54 @@
 			    <a href="#" class="dropdown-toggle"> <i class="icon icon-signal"></i> <span>Dashboard</span><b class="arrow icon-angle-down"></b></a>
 			    <ul class="submenu">
                    <li id="menu_statsSummary"><a href="admin"> <i class="icon icon-asterisk"></i> <span>汇总统计</span></a></li>
-                   <li id="menu_statsRead"><a href="admin/dashboard/read"> <i class="icon icon-asterisk"></i> <span>任务情况</span></a></li>
+                   <li id="menu_statsRead"><a href="admin/dashboard/read"> <i class="icon icon-asterisk"></i> <span>任务</span></a></li>
                    <li id="menu_statsIncome"><a href="admin/dashboard/income"> <i class="icon icon-asterisk"></i> <span>收入</span></a></li>
                    <li id="menu_statsCost"><a href="admin/dashboard/cost"> <i class="icon icon-asterisk"></i> <span>花费</span></a></li>
                    <li id="menu_statsUser"><a href="admin/dashboard/user"> <i class="icon icon-asterisk"></i> <span>用户</span></a></li>
-                   <li id="menu_inviteAct"><a href="admin/dashboard/inviteAct"> <i class="icon icon-asterisk"></i> <span>收徒分享</span></a></li>
                 </ul>
 			</li>
+
+			<li class="" id="menu_tj_browser">
+                <a href="#" class="dropdown-toggle"><i class="icon icon-bar-chart"></i> <span>业务统计</span> <b class="arrow icon-angle-down"></b></a>
+                <ul class="submenu">
+                    <li id="submen_tj_checkin"><a href="admin/tj/checkin"><i class="icon-double-angle-right"></i>签到</a></li>
+                    <li id="submen_tj_redpack"><a href="admin/tj/common?eventType=receiveRedPack"><i class="icon-double-angle-right"></i>红包</a></li>
+                    <li id="submen_tj_inviteFriend"><a href="admin/tj/common?eventType=inviteFriend"><i class="icon-double-angle-right"></i>邀请好友</a></li>
+                    <li id="submen_tj_readArticle"><a href="admin/tj/common?eventType=readArticle"><i class="icon-double-angle-right"></i>阅读文章</a></li>
+                    <li id="submen_tj_post"><a href="admin/tj/post"><i class="icon-double-angle-right"></i>采集</a></li>
+                    <li id="submen_tj_team"><a href="admin/tj/team"><i class="icon-double-angle-right"></i>团队</a></li>
+                    <li id="submen_tj_task"><a href="admin/tj/browserTask"><i class="icon-double-angle-right"></i>分享任务</a></li>
+                    <li id="submen_tj_comment"><a href="admin/tj/comment"><i class="icon-double-angle-right"></i>评论</a></li>
+                    <li id="submen_tj_like"><a href="admin/tj/common?eventType=commentIsLiked"><i class="icon-double-angle-right"></i>评论点赞</a></li>
+                    <li id="submen_tj_search"><a href="admin/tj/searchLog"><i class="icon-double-angle-right"></i>搜索</a></li>
+                    <li id="submen_tj_coin"><a href="admin/tj/coin"><i class="icon-double-angle-right"></i>每日金币</a></li>
+                    <li id="submen_tj_card"><a href="admin/tj/card"><i class="icon-double-angle-right"></i>加速卡</a></li>
+                    <li id="submen_tj_exchangeResource"><a href="admin/tj/exchangeResource"><i class="icon-double-angle-right"></i>资源兑换</a></li>
+                    <li id="submen_tj_withdraw"><a href="admin/tj/withdraw"><i class="icon-double-angle-right"></i>提现</a></li>
+                    <li id="submen_tj_cz"><a href="admin/tj/cz"><i class="icon-double-angle-right"></i>充值</a></li>
+                    <li id="submen_inviteAct"><a href="admin/tj/inviteAct"> <i class="icon icon-asterisk"></i> <span>分享收徒</span></a></li>
+                    <li id="submen_tj_userBox"><a href="admin/tj/userBox"> <i class="icon icon-asterisk"></i> <span>用户宝箱</span></a></li>
+                    <li id="submenu_bandInvite"><a href="admin/tj/common?eventType=inviteRelationBind"> <i class="icon icon-asterisk"></i> <span>绑定邀请码</span></a></li>
+                    <li id="submen_tj_friendActive"><a href="admin/tj/friendActive"> <i class="icon icon-asterisk"></i> <span>徒弟活跃奖励</span></a></li>
+                </ul>
+            </li>
+
+            <li class="" id="menu_wx">
+                <a href="#" class="dropdown-toggle"><i class="icon icon-bar-chart"></i> <span>微信统计</span> <b class="arrow icon-angle-down"></b></a>
+                <ul class="submenu">
+                    <li id="wx_checkin_consult"><a href="admin/wx/wxCheckin"> <i class="icon icon-asterisk"></i> <span>微信签到查询</span></a></li>
+                    <li id="wx_checkin_log"><a href="admin/wx/wxCheckinLog"> <i class="icon icon-asterisk"></i> <span>微信签到记录</span></a></li>
+                </ul>
+            </li>
+
+
+            <li class="" id="menu_deeptask">
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-tasks"></i> <span>深度任务</span><b class="arrow icon-angle-down"></b></a>
+                <ul class="submenu">
+                    <li id="deeptask_list"><a href="admin/deepTask/list"> <i class="icon icon-asterisk"></i> <span>任务管理</span></a></li>
+                    <li id="deeptask_order"><a href="admin/deepTask/order"> <i class="icon icon-asterisk"></i> <span>任务订单</span></a></li>
+                </ul>
+            </li>
 
             <li class="" id="menu_app">
                 <a href="#" class="dropdown-toggle"> <i class="icon icon-desktop"></i> <span>应用管理</span> <b class="arrow icon-angle-down"></b></a>
@@ -34,17 +75,17 @@
                 <a href="#" class="dropdown-toggle"> <i class="icon icon-book"></i> <span>文章管理</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
                     <li id="submenu_category"><a href="admin/category/list"><i class="icon-double-angle-right"></i>分类管理</a></li>
-                    <li id="submenu_article"><a href="admin/article/list?categoryId=0"><i class="icon-double-angle-right"></i>文章管理</a></li>
+                    <li id="submenu_article"><a href="admin/article/list?categoryId=99"><i class="icon-double-angle-right"></i>文章列表</a></li>
                     <li id="submenu_fetch"><a href="admin/article/fetch"><i class="icon-double-angle-right"></i>文章抓取</a></li>
                     <li id="submenu_article_toplist"><a href="admin/article/toplist?categoryId=0"><i class="icon-double-angle-right"></i>文章排行榜</a></li>
                 </ul>
             </li>
 
             <li class="" id="menu_zhidekan">
-                <a href="#" class="dropdown-toggle"> <i class="icon icon-film"></i> <span>值得看</span> <b class="arrow icon-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-film"></i> <span>值得看采集</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
-                    <li id="submenu_initial_user"><a href="admin/initialUsers/list"><i class="icon-double-angle-right"></i>采集用户</a></li>
-                    <li id="submenu_initial_user_apply"><a href="admin/initialUsersApply/list"><i class="icon-double-angle-right"></i>采集用户申请</a></li>
+                    <!--<li id="submenu_initial_user"><a href="admin/initialUsers/list"><i class="icon-double-angle-right"></i>采集用户</a></li>-->
+                    <!--<li id="submenu_initial_user_apply"><a href="admin/initialUsersApply/list"><i class="icon-double-angle-right"></i>采集用户申请</a></li>-->
                     <li id="submenu_tag"><a href="admin/tag/list?contentType=post"><i class="icon-double-angle-right"></i>标签列表</a></li>
                     <li id="submenu_post"><a href="admin/post/list"><i class="icon-double-angle-right"></i>采集列表</a></li>
                     <li id="submenu_post_topListYesterday"><a href="admin/post/topListYesterday?type=1"><i class="icon-double-angle-right"></i>昨日采集推荐</a></li>
@@ -57,7 +98,7 @@
                 </ul>
             </li>
             <li class="" id="menu_team">
-                <a href="#" class="dropdown-toggle"> <i class="icon icon-film"></i> <span>团队</span> <b class="arrow icon-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-film"></i> <span>团队管理</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
                     <li id="submenu_team_list"><a href="admin/team/team_list?status=-1"><i class="icon-double-angle-right"></i>团队</a></li>
                     <li id="submenu_team_member_list"><a href="admin/team/team_member_list"><i class="icon-double-angle-right"></i>团队成员</a></li>
@@ -84,9 +125,9 @@
             </li>
 
             <li class="" id="menu_activity">
-                <a href="#" class="dropdown-toggle"> <i class="icon icon-bookmark"></i> <span>运营活动/列表</span> <b class="arrow icon-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-bookmark"></i> <span>运营活动</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
-                    <li id="submenu_aggregation"><a href="admin/aggregation/list"><i class="icon-double-angle-right"></i>列表页</a></li>
+                    <li id="submenu_aggregation"><a href="admin/aggregation/list"><i class="icon-double-angle-right"></i>活动列表页</a></li>
                     <li id="submenu_optActivity"><a href="admin/optActivity/list"><i class="icon-double-angle-right"></i>活动管理</a></li>
                     <li id="submenu_activityRewardLog"><a href="admin/optActivity/rewardLogs"><i class="icon-double-angle-right"></i>活动奖励</a></li>
                     <li id="submenu_boxActConfig"><a href="admin/boxAct/update"><i class="icon-double-angle-right"></i>宝箱活动配置</a></li>
@@ -122,7 +163,7 @@
                 </ul>
             </li>
             <li class="" id="menu_novel">
-                <a href="#" class="dropdown-toggle"> <i class="icon icon-book"></i> <span>首页推送管理</span> <b class="arrow icon-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-book"></i> <span>首页推荐</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
                     <li id="submenu_pushRule"><a href="admin/pushRule/list?ruleType=1"><i class="icon-double-angle-right"></i>推送规则</a></li>
                     <li id="submenu_recommendQueue"><a href="admin/recommendQueue/list?recType=1"><i class="icon-double-angle-right"></i>内容推荐队列</a></li>
@@ -133,9 +174,9 @@
             <li class="" id="menu_recall"><a href="admin/recallPlan/list"><i class="icon icon-user"></i>用户召回</a>
 
             <li class="" id="menu_stat">
-                <a href="#" class="dropdown-toggle"> <i class="icon icon-search"></i> <span>用户数据查询</span> <b class="arrow icon-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-search"></i> <span>用户数据</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
-                    <li id="submenu_stat_users"><a href="admin/users/base"><i class="icon-double-angle-right"></i>基本信息</a></li>
+                    <li id="submenu_stat_users"><a href="admin/users/base"><i class="icon-double-angle-right"></i>用户信息</a></li>
                     <li id="submenu_stat_userCoin"><a href="admin/users/coin"><i class="icon-double-angle-right"></i>金币数据</a></li>
                     <li id="submenu_stat_cash"><a href="admin/users/cash"><i class="icon-double-angle-right"></i>现金流水</a></li>
                     <li id="submenu_stat_friendlist"><a href="admin/inviteRelation/friends"><i class="icon-double-angle-right"></i>好友列表</a></li>
@@ -149,54 +190,36 @@
                 </ul>
             </li>
 
-            <li class="" id="menu_tj_browser">
-                <a href="#" class="dropdown-toggle"><i class="icon icon-bar-chart"></i> <span>数据统计</span> <b class="arrow icon-angle-down"></b></a>
-                <ul class="submenu">
-                    <li id="submen_tj_checkin"><a href="admin/tj/checkin"><i class="icon-double-angle-right"></i>签到</a></li>
-                    <li id="submen_tj_redpack"><a href="admin/tj/common?eventType=receiveRedPack"><i class="icon-double-angle-right"></i>红包</a></li>
-                    <li id="submen_tj_inviteFriend"><a href="admin/tj/common?eventType=inviteFriend"><i class="icon-double-angle-right"></i>邀请好友</a></li>
-                    <li id="submen_tj_readArticle"><a href="admin/tj/common?eventType=readArticle"><i class="icon-double-angle-right"></i>阅读文章</a></li>
-                    <li id="submen_tj_post"><a href="admin/tj/post"><i class="icon-double-angle-right"></i>采集</a></li>
-                    <li id="submen_tj_team"><a href="admin/tj/team"><i class="icon-double-angle-right"></i>团队</a></li>
-                    <li id="submen_tj_task"><a href="admin/tj/browserTask"><i class="icon-double-angle-right"></i>分享任务</a></li>
-                    <li id="submen_tj_comment"><a href="admin/tj/comment"><i class="icon-double-angle-right"></i>评论</a></li>
-                    <li id="submen_tj_like"><a href="admin/tj/common?eventType=commentIsLiked"><i class="icon-double-angle-right"></i>评论点赞</a></li>
-                    <li id="submen_tj_search"><a href="admin/tj/searchLog"><i class="icon-double-angle-right"></i>搜索</a></li>
-                    <li id="submen_tj_coin"><a href="admin/tj/coin"><i class="icon-double-angle-right"></i>每日金币</a></li>
-                    <li id="submen_tj_card"><a href="admin/tj/card"><i class="icon-double-angle-right"></i>加速卡</a></li>
-                    <li id="submen_tj_exchangeResource"><a href="admin/tj/exchangeResource"><i class="icon-double-angle-right"></i>资源兑换</a></li>
-                    <li id="submen_tj_withdraw"><a href="admin/tj/withdraw"><i class="icon-double-angle-right"></i>提现</a></li>
-                    <li id="submen_tj_cz"><a href="admin/tj/cz"><i class="icon-double-angle-right"></i>充值</a></li>
-                </ul>
-            </li>
-
             <li class="" id="menu_tj_date"><a href="admin/tj/date"><i class="icon icon-key"></i> <span>财务数据</span></a>
 
             <li class="" id="menu_withdraw">
                 <a href="#" class="dropdown-toggle"> <i class="icon icon-credit-card"></i> <span>提现充值</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
-                    <li id="submenu_withdraw_order"><a href="admin/withdraw/list?status=6&type=2&isFast=1"><i class="icon-double-angle-right"></i>提现</a></li>
-                    <li id="menu_cz"><a href="admin/cz/list?status=7"><i class="icon icon-phone"></i>充值</a></li>
-                    <li id="menu_duiba_order"><a href="admin/duibaOrders/list"><i class="icon icon-phone"></i>兑吧订单列表</a></li>
-                    <li id="withdraw_find"><a href="admin/withdraw/list_find"><i class="icon-double-angle-right"></i>提现/充值记录</a></li>
-                    <li id="submenu_withdraw_account"><a href="admin/withdraw/account"><i class="icon-double-angle-right"></i>提现账号查询</a></li>
+                    <li id="submenu_withdraw_order"><a href="admin/withdraw/list?status=6&type=2&isFast=1"><i class="icon-double-angle-right"></i>提现订单</a></li>
+                    <li id="menu_cz"><a href="admin/cz/list?status=7"><i class="icon icon-phone"></i>充值订单</a></li>
+                    <li id="menu_duiba_order"><a href="admin/duibaOrders/list"><i class="icon icon-phone"></i>兑吧订单</a></li>
+                    <li id="withdraw_find"><a href="admin/withdraw/list_find"><i class="icon-double-angle-right"></i>提现记录</a></li>
+                    <li id="submenu_withdraw_account"><a href="admin/withdraw/account"><i class="icon-double-angle-right"></i>提现账号</a></li>
                 </ul>
             </li>
 
             <li class="" id="menu_black">
-                <a href="#" class="dropdown-toggle"> <i class="icon icon-user"></i> <span>黑名单管理</span> <b class="arrow icon-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-user"></i> <span>黑白名单</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
                     <li id="submenu_black_users"><a href="admin/blackUsers"><i class="icon-double-angle-right"></i>黑名单</a></li>
+                    <li id="submenu_gray_users"><a href="admin/grayUsers"><i class="icon-double-angle-right"></i>灰名单</a></li>
                     <li id="submenu_white_users"><a href="admin/whiteUser/list"><i class="icon-double-angle-right"></i>白名单</a></li>
+                    <li id="submenu_aliPay"><a href="admin/aliPay/list"><i class="icon-double-angle-right"></i>支付宝账号黑名单</a></li>
+
                 </ul>
             </li>
-            <li class="" id="menu_sensitiveWords"><a href="admin/sensitiveWords/list"> <i class="icon-heart"></i> <span>敏感词管理</span></a>
+            <li class="" id="menu_sensitiveWords"><a href="admin/sensitiveWords/list"> <i class="icon-heart"></i> <span>敏感词</span></a>
+            <li class="" id="menu_config"><a href="admin/systemSetting/list"> <i class="icon-heart"></i> <span>配置管理</span></a>
 
             <li class="" id="menu_monitor">
-                <a href="#" class="dropdown-toggle"> <i class="icon icon-eye-open"></i> <span>系统配置/监控</span> <b class="arrow icon-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"> <i class="icon icon-eye-open"></i> <span>系统监控</span> <b class="arrow icon-angle-down"></b></a>
                 <ul class="submenu">
-                    <li id="submenu_config"><a href="admin/systemSetting/list"><i class="icon-double-angle-right"></i>配置管理</a></li>
-                    <li id="submenu_optLog"><a href="admin/optLogs"><i class="icon-double-angle-right"></i>后台操作日志</a></li>
+                    <li id="submenu_optLog"><a href="admin/optLogs"><i class="icon-double-angle-right"></i>操作日志</a></li>
                     <li id="submenu_redis"><a href="admin/monitor/redis"><i class="icon-double-angle-right"></i>Redis监控</a></li>
                     <li id="submenu_db"><a href="admin/monitor/db"><i class="icon-double-angle-right"></i>DB监控</a></li>
                 </ul>

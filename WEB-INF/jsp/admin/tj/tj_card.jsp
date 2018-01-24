@@ -5,17 +5,139 @@
 <jsp:include page="../header.jsp" />
 <jsp:include page="../sidebar.jsp" />
 <!-- 页面 -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="assets/js/echarts.min.js"></script>
+</head>
+<body>
 <div id="main-content" class="clearfix">
 	<div id="page-content" class="clearfix">
 		<div class="page-header position-relative">
 			<h1>卡片销售</h1>
 		</div>
         <div class="control-group">
+
+            <div id="main" style="width: 1000px;height:400px;"></div>
+            <script type="text/javascript">
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+                var option = {
+                    title: {
+                        text: '卡片销售',
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['购买人数', '购买卡片总数', '人均购买数', '总花费零钱']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataZoom: {
+                                yAxisIndex: 'none'
+                            },
+                            dataView: {readOnly: false},
+                            magicType: {type: ['line', 'bar']},
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            inverse:true,
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>'${tj.date}'</c:forEach>
+                            ]
+                        }
+                    ],
+                    yAxis: {
+                        type: 'value',
+                    },
+                    series: [
+                        {
+                            name: '购买人数',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#ff251e",
+                                    lineStyle: {
+                                        color: "#ff251e"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.totalUser}</c:forEach>
+                            ]
+                        },
+                        {
+                            name: '购买卡片总数',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#86ff21",
+                                    lineStyle: {
+                                        color: "#7aff4a"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.totalNum}</c:forEach>
+                            ]
+                        },
+                        {
+                            name: '人均购买数',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#4bffe6",
+                                    lineStyle: {
+                                        color: "#4bffd8"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.averageNum}</c:forEach>
+                            ]
+                        },
+                        {
+                            name: '总花费零钱',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#ffb52d",
+                                    lineStyle: {
+                                        color: "#ffb52d"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.totalAmount}</c:forEach>
+                            ]
+                        }
+                    ]
+                };
+
+
+                console.log(option)
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            </script>
+
             <div class="controls">
                开始日期:&nbsp;&nbsp; <input type="text" id="startTime" data-oval="" class="start_time input-xlarge" />
                 <input  type="hidden" name="start_time" id="start_time_hidden" />
                 &nbsp;&nbsp;
                 <a onclick="query()" class="btn btn-success btn-small"> <i class="icon-search"></i>查询</a>
+                <div onclick="quickQuery1()" class="btn btn-success btn-small" data-id="1">昨天</div>
+                <div onclick="quickQuery3()" class="btn btn-success btn-small" data-id="3">最近3天</div>
+                <div onclick="quickQuery7()" class="btn btn-success btn-small" data-id="7">最近7天</div>
             </div>
         </div>
 		<div class="row-fluid">
@@ -70,6 +192,24 @@ function gx(){
 
 function query(){
     var starttime = $("#start_time_hidden").val();
+    window.location.href = "admin/tj/card?start_time=" + starttime;
+}
+
+function quickQuery1(){
+    var endtime = ${today_end_time};
+    var starttime = endtime - (1*24*60*60*1000);
+    window.location.href = "admin/tj/card?start_time=" + starttime;
+}
+
+function quickQuery3(){
+    var endtime = ${today_end_time};
+    var starttime = endtime - (2*24*60*60*1000);
+    window.location.href = "admin/tj/card?start_time=" + starttime;
+}
+
+function quickQuery7(){
+    var endtime = ${today_end_time};
+    var starttime = endtime - (6*24*60*60*1000);
     window.location.href = "admin/tj/card?start_time=" + starttime;
 }
 </script>

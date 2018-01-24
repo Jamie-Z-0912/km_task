@@ -102,23 +102,14 @@
 				<table class="table table-bordered table-striped" style="table-layout:fixed; word-break: break-all;">
 					<thead>
 						<tr>
-							<th>文章ID</th>
-                            <th>标题</th>
-                            <th>标签</th>
-                            <th>来源</th>
-                            <th>预览</th>
-                            <th>uid</th>
-                            <th>发布时间</th>
-                            <th>上架/下架时间</th>
-                            <th>密码</th>
-                            <th>PV</th>
-                            <th>点击数</th>
-                            <th>评论</th>
-                            <th>点赞</th>
-                            <th>有效阅读</th>
-                            <th>购买数</th>
-                            <th>状态</th>
-							<th>操作</th>
+							<th width="5%">ID</th>
+                            <th width="20%">采集内容</th>
+                            <th>图片</th>
+                            <th>采集时间</th>
+                            <th>上/下架时间</th>
+                            <th width="8%">状态</th>
+                            <th>统计</th>
+							<th width="8%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -127,72 +118,41 @@
 								<td>${art.id}</td>
 
                                 <td>
-
-                                    <c:if test="${empty art.title}">
+                                    标题: <c:if test="${empty art.title}">
 
                                         ------
                                     </c:if>
                                     <c:if test="${not empty art.title}">
-
-
                                         ${art.title}
                                     </c:if>
-
+                                    </br>
+                                    标签: ${art.tagName}</br>
+                                    来源: <c:forEach items="${origins}" var="orn" varStatus="st">
+                                            <c:if test="${orn.value == art.origin}">${orn.desc}</c:if>
+                                         </c:forEach></br>
+                                    采集者UID: ${art.uid}</br>
+                                    密码: ${art.secretKey}
                                 </td>
-                                <td>
-                                    ${art.tagName}
-                                </td>
-                                <td>
-                                    <c:forEach items="${origins}" var="orn" varStatus="st">
-                                        <c:if test="${orn.value == art.origin}">${orn.desc}</c:if>
-                                    </c:forEach>
-
-                                </td>
-
                                 <td>
                                     <c:forEach items="${art.imagesList}" var="img" varStatus="st">
                                         <img src="${img}" id="avatar" name="avatar" style="width: 130px;" />
                                     </c:forEach>
                                 </td>
-                                <td>
-                                   ${art.uid}
-                                </td>
                                 <td><suishen_fmt:formatDate value="${art.addedTime}" /></td>
                                 <td><suishen_fmt:formatDate value="${art.pubTime}" /></td>
-                                <td>
-                                <c:if test="${empty art.secretKey}">
-                                    无
-                                </c:if>
-                                </td>
-                                <td>
-                                        ${art.pv}
-                                </td>
-                                <td>
-                                        ${art.click}
-                                </td>
-                                <td>
-                                        ${art.commentNum}
-                                </td>
-                                <td>
-                                        ${art.praiseNum}
-                                </td>
-                                <td>
-                                        ${art.viewNum}
-                                </td>
-                                <td>
-                                        ${art.exchangeNum}
-                                </td>
                                 <td>
                                     <c:if test="${art.status == 1}">发布中</c:if>
                                     <c:if test="${art.status == 2}">上架</c:if>
                                     <c:if test="${art.status == 3}">下架(${art.message})</c:if>
                                 </td>
-
-
-
-
-
-
+                                <td>
+                                        PV: ${art.pv}</br>
+                                        点击数: ${art.click}</br>
+                                        评论数: ${art.commentNum}</br>
+                                        点赞数: ${art.praiseNum}</br>
+                                        有效阅读数:  ${art.viewNum}</br>
+                                        购买数: ${art.exchangeNum}
+                                </td>
 								<td>
                                     <c:if test="${art.status == 3}">
                                         <a class="set_top update" href="javascript:up('${art.id}');" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>上架</span></span></a><br/>
@@ -213,73 +173,54 @@
                                             <a class="set_top update" href="javascript:addRecommend('${art.id}');" target="_blank" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>加入推荐队列</span></span></a><br/>
                                         </c:if>
                                     </c:if>
-
-
-
-                                    <a class="set_top update" href="admin/post/userlist?uid=${art.uid}" style="color: #4f99c6; text-decoration: none;">查看采集者</a><br/>
+                                    <a class="set_top update" href="admin/post/userlist?uid=${art.uid}" style="color: #4f99c6; text-decoration: none;">采集者</a><br/>
                                     <a class="set_top update" href="admin/msg/push?type=post&id=${art.id}&platform=DEFAULT" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>推送</span></span></a><br/>
                                 </td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-
-				<div class="row-fluid">
-                    <div class="span12">
-                        <div class="dataTables_paginate paging_bootstrap pagination">
-                        ${total}条记录共<b>${totalPage}</b>页
+                <!-- 分页 -->
+                <div class="widget-box" style="margin-top: -10px;">
+                    <div class="widget-header">
+                        <div class="dataTables_info dataTables_paginate paging_bootstrap pagination" style="margin-top: 5px; ">
                             <ul>
+                                <li class="prev">
+                                    <span class="previous fg-button ui-button ui-state-default ui-state-disabled">${total}条记录, 共${totalPage}页, 当前第${page}页</span>
+                                </li>
                                 <c:choose>
-                                    <c:when test="${page gt 1}">
-                                        <li><a
-                                            href="admin/post/list?page=${page - 1}&title=${title}&id=${id}&uid=${uid}&addTime=${addTime}&status=${status}&tagId=${tagId}&origin=${origin}&contentType=${contentType}">&lt;&lt;</a></li>
+                                    <c:when test="${page!=1}">
+                                        <li class="prev">
+                                            <a href="javascript:turnPage(1)" title="首页" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-default"><span>首页</span></a>
+                                            <a href="javascript:turnPage(${page-1})" title="上一页" class="previous fg-button ui-button ui-state-default ui-state-default"><span>上一页</span></a>
+                                        </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">&lt;&lt;</a></li>
+                                        <li class="prev">
+                                            <span class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">首页</span>
+                                            <span class="previous fg-button ui-button ui-state-default ui-state-disabled">上一页</span>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
-
                                 <c:choose>
-                                    <c:when test="${page gt 1}">
-                                        <li><a
-                                            href="admin/post/list?page=1&title=${title}&id=${id}&uid=${uid}&addTime=${addTime}&status=${status}&tagId=${tagId}&origin=${origin}&contentType=${contentType}">1</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">1</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:choose>
-                                    <c:when test="${totalPage ge 2 and page ne 2}">
-                                        <li><a
-                                            href="admin/post/list?page=2&title=${title}&id=${id}&uid=${uid}&addTime=${addTime}&status=${status}&tagId=${tagId}&origin=${origin}&contentType=${contentType}">2</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">2</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:choose>
-                                    <c:when test="${totalPage ge 3 and page ne 3}">
-                                        <li class=""><a href="admin/post/list?page=3&title=${title}&id=${id}&uid=${uid}&addTime=${addTime}&status=${status}&tagId=${tagId}&origin=${origin}&contentType=${contentType}">3</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">3</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:choose>
-                                    <c:when test="${page lt totalPage}">
-                                        <li class="next"><a
-                                            href="admin/post/list?page=${page + 1}&title=${title}&id=${id}&uid=${uid}&addTime=${addTime}&status=${status}&tagId=${tagId}&origin=${origin}&contentType=${contentType}">&gt;&gt;</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">&gt;&gt;</a></li>
-                                    </c:otherwise>
+                                     <c:when test="${page!=totalPage}">
+                                        <li class="next">
+                                            <a href="javascript:turnPage(${page+1})" title="下一页" class="next fg-button ui-button ui-state-default"><span>下一页</span></a>
+                                            <a href="javascript:turnPage(${totalPage})" title="末页" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default"><span>末页</span></a>
+                                        </li>
+                                     </c:when>
+                                     <c:otherwise>
+                                        <li class="next">
+                                            <span class="next fg-button ui-button ui-state-default ui-state-disabled">下一页</span>
+                                            <span class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">末页</span>
+                                        </li>
+                                     </c:otherwise>
                                 </c:choose>
                             </ul>
-                        </div>
+                         </div>
                     </div>
+                </div>
+                <!-- 分页 -->
 			</div>
 		</div>
 	</div>
@@ -390,6 +331,12 @@ function gx(){
     var start = new Date($("#addTimeS").val().replace(/-/g,   "/")).getTime();
     $("#addTimeS").val(new Date($("#addTimeS").val().replace(/-/g,   "/")).format("yyyy-MM-dd"));
     $("#addTime").val(start);
+}
+
+function turnPage(page) {
+	// 分页列表URL
+	var href = "admin/post/list?title=${title}&id=${id}&uid=${uid}&addTime=${addTime}&status=${status}&tagId=${tagId}&origin=${origin}&contentType=${contentType}&page=" + page;
+	window.location.href = href;
 }
 </script>
 </html>

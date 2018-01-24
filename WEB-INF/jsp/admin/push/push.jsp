@@ -49,11 +49,16 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="control-group">
+                        <label class="control-label">消息标题(10个字以内)</label>
+                        <div class="controls">
+                            <input type="text" id="a" name="a" value="快马小报" class="input-xxlarge" maxlength="10"/>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label class="control-label">消息内容(30个字以内)</label>
                         <div class="controls">
-                            <input type="text" id="b" name="b" value="${title}" class="input-xxlarge" maxlength="40"/>
+                            <input type="text" id="b" name="b" value="${msg}" class="input-xxlarge" maxlength="40"/>
                         </div>
                     </div>
                     <div class="control-group">

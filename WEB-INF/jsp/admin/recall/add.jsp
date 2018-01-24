@@ -72,10 +72,9 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">召回时间点(<font color="red">必填</font>),上午:</label>
+                        <label class="control-label">召回时间(<font color="red">必填</font>)</label>
                         <div class="controls">
-                            <input type="text" name="recallRate" class="input-large" value="10"/>点,
-                            下午:<input type="text" name="recallRate" class="input-large" value="19"/>点
+                            <input type="text" name="recallRate" class="input-large" value="10"/>点
                         </div>
                     </div>
 
@@ -94,6 +93,7 @@
                         <label class="control-label">奖励方式:(<font color="red">必填</font>)</label>
                         <div class="controls">
                             <select name="rewardMethod" id="rewardMethod">
+                                    <option value="">无奖励</option>
                                     <option value="card:3">3天加速卡</option>
                             </select>
                         </div>

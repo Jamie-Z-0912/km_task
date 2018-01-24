@@ -102,22 +102,31 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th width="10%">账号</th>
-							<th width="10%">账号类型</th>
+							<th width="10%">拉黑账号</th>
+							<th width="8%">账号类型</th>
+							<th width="10%">应用</th>
 							<th width="10%">拉黑类型</th>
 							<th width="20%">拉黑原因</th>
-                            <th width="10%">状态</th>
+                            <th width="7%">状态</th>
                             <th width="10%">拉黑日期</th>
-                            <th width="10%">操作人</th>
                             <th width="10%">操作日期</th>
-							<th width="15%" id="option">操作</th>
+                            <th width="10%">操作人</th>
+							<th width="10%" id="option">操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${blackUsers}" var="blackUser" varStatus="st">
 							<tr>
-								<td>${blackUser.blackAccount}</td>
+							    <td>
+                                    <c:if test="${blackUser.type == 'UID'}">
+                                        <a class="set_top update" target="_blank" href="admin/users/base?uid=${blackUser.blackAccount}" style="color: #4f99c6; text-decoration: none;">${blackUser.blackAccount}</a>
+                                    </c:if>
+                                    <c:if test="${blackUser.type == 'PHONE'}">
+                                        <a class="set_top update" target="_blank" href="admin/users/base?phone=${blackUser.blackAccount}" style="color: #4f99c6; text-decoration: none;">${blackUser.blackAccount}</a>
+                                    </c:if>
+								</td>
 								<td>${blackUser.type}</td>
+								<td>${blackUser.application}</td>
 								<td>
 								    <c:forEach items="${blackReasonTypeValues}" var="brt" varStatus="st">
                                         <c:if test="${brt.type == blackUser.blackReasonType}">
@@ -137,8 +146,8 @@
                                     </c:choose>
                                 </td>
                                 <td><suishen_fmt:formatDate value="${blackUser.addedTime}" /></td>
-                                <td>${blackUser.handler}</td>
 								<td><suishen_fmt:formatDate value="${blackUser.modifiedTime}" /></td>
+								<td>${blackUser.handler}</td>
 								<td>
 								    <c:if test="${blackUser.status == 1}">
                                         <a class="set_top update" href="javascript:update(${blackUser.id}, 2);" style="color: #4f99c6; text-decoration: none;">
@@ -148,78 +157,52 @@
                                         <a class="set_top update" href="javascript:update(${blackUser.id}, 1);" style="color: #4f99c6; text-decoration: none;">
                                         <span class="blue">  <span>拉黑</span></span></a></br>
                                     </c:if>
-                                     <c:if test="${blackUser.type == 'UID'}">
-                                        <a class="set_top update" href="admin/users/base?uid=${blackUser.blackAccount}" style="color: #4f99c6; text-decoration: none;">
-                                        <span class="blue">  <span>用户信息</span></span></a></br>
-                                     </c:if>
-                                    <c:if test="${blackUser.type == 'PHONE'}">
-                                        <a class="set_top update" href="admin/users/base?phone=${blackUser.blackAccount}" style="color: #4f99c6; text-decoration: none;">
-                                        <span class="blue"><span>用户信息</span></span></a>
-                                     </c:if>
                                 </td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="row-fluid">
-                    <div class="span12">
-                        <div class="dataTables_paginate paging_bootstrap pagination">
-                        ${total}条记录共<b>${totalPage}</b>页
+                <!-- 分页 -->
+                <div class="widget-box" style="margin-top: -10px;">
+                    <div class="widget-header">
+                        <div class="dataTables_info dataTables_paginate paging_bootstrap pagination" style="margin-top: 5px; ">
                             <ul>
+                                <li class="prev">
+                                    <span class="previous fg-button ui-button ui-state-default ui-state-disabled">${total}条记录, 共${totalPage}页, 当前第${page}页</span>
+                                </li>
                                 <c:choose>
-                                    <c:when test="${page gt 1}">
-                                        <li><a
-                                            href="admin/blackUsers?page=${page-1}&uid=${uid}&blackUserStatus=${blackUserStatus}&blackAccountType=${blackAccountType}&blackReasonType=${blackReasonType}&startTime=${startTime}&endTime=${endTime}">&lt;&lt;</a></li>
+                                    <c:when test="${page!=1}">
+                                        <li class="prev">
+                                            <a href="javascript:turnPage(1)" title="首页" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-default"><span>首页</span></a>
+                                            <a href="javascript:turnPage(${page-1})" title="上一页" class="previous fg-button ui-button ui-state-default ui-state-default"><span>上一页</span></a>
+                                        </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">&lt;&lt;</a></li>
+                                        <li class="prev">
+                                            <span class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">首页</span>
+                                            <span class="previous fg-button ui-button ui-state-default ui-state-disabled">上一页</span>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
-
                                 <c:choose>
-                                    <c:when test="${page gt 1}">
-                                        <li><a
-                                            href="admin/blackUsers?page=1&uid=${uid}&blackUserStatus=${blackUserStatus}&blackAccountType=${blackAccountType}&blackReasonType=${blackReasonType}&startTime=${startTime}&endTime=${endTime}">1</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">1</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:choose>
-                                    <c:when test="${totalPage ge 2 and page ne 2}">
-                                        <li><a
-                                            href="admin/blackUsers?page=2&uid=${uid}&blackUserStatus=${blackUserStatus}&blackAccountType=${blackAccountType}&blackReasonType=${blackReasonType}&startTime=${startTime}&endTime=${endTime}">2</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">2</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:choose>
-                                    <c:when test="${totalPage ge 3 and page ne 3}">
-                                        <li class=""><a
-                                                href="admin/blackUsers?page=3&uid=${uid}&blackUserStatus=${blackUserStatus}&blackAccountType=${blackAccountType}&blackReasonType=${blackReasonType}&startTime=${startTime}&endTime=${endTime}">3</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">3</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-
-                                <c:choose>
-                                    <c:when test="${page lt totalPage}">
-                                        <li class="next"><a
-                                            href="admin/blackUsers?page=${page+1}&uid=${uid}&blackUserStatus=${blackUserStatus}&blackAccountType=${blackAccountType}&blackReasonType=${blackReasonType}&startTime=${startTime}&endTime=${endTime}">&gt;&gt;</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="prev disabled"><a href="javascript:void(0);">&gt;&gt;</a></li>
-                                    </c:otherwise>
+                                     <c:when test="${page!=totalPage}">
+                                        <li class="next">
+                                            <a href="javascript:turnPage(${page+1})" title="下一页" class="next fg-button ui-button ui-state-default"><span>下一页</span></a>
+                                            <a href="javascript:turnPage(${totalPage})" title="末页" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default"><span>末页</span></a>
+                                        </li>
+                                     </c:when>
+                                     <c:otherwise>
+                                        <li class="next">
+                                            <span class="next fg-button ui-button ui-state-default ui-state-disabled">下一页</span>
+                                            <span class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">末页</span>
+                                        </li>
+                                     </c:otherwise>
                                 </c:choose>
                             </ul>
-                            每页<b>${pageSize}</b>条
-                        </div>
+                         </div>
                     </div>
-			    </div>
+                </div>
+                <!-- 分页 -->
 			</div>
 		</div>
 	</div>
@@ -294,6 +277,12 @@ function gx(){
 }
 function addBlackUser() {
     window.location = "admin/blackUser/add";
+}
+
+function turnPage(page) {
+	// 分页列表URL
+	var href = "admin/blackUsers?uid=${uid}&blackUserStatus=${blackUserStatus}&blackAccountType=${blackAccountType}&blackReasonType=${blackReasonType}&startTime=${startTime}&endTime=${endTime}&page=" + page;
+	window.location.href = href;
 }
 </script>
 </html>

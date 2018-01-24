@@ -86,17 +86,12 @@
 				<table class="table table-bordered table-striped" style="table-layout:fixed; word-break: break-all;">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>应用</th>
-							<th>广告标题</th>
+							<th width="7%">广告ID</th>
+							<th width="20%">广告内容</th>
                             <th>图片</th>
-                            <th>来源</th>
-                            <th>布局</th>
-                            <th>投放区域</th>
-                            <th>投放平台</th>
                             <th>投放位置</th>
-                            <th>是否需要登陆</th>
-                            <th>tips(标识)</th>
+                            <th>投放应用</th>
+                            <th>投放平台</th>
                             <th>状态</th>
 							<th>开始时间</th>
                             <th>结束时间</th>
@@ -108,30 +103,23 @@
 							<tr>
 								<td>${ad.id}</td>
 								<td>
-                                    <c:if test="${ad.application == ''}">
-                                          默认
-                                    </c:if>
-                                    <c:if test="${ad.application != ''}">
-                                          ${ad.application}
-                                    </c:if>
-								</td>
-								<td>
-                                   <a href="${ad.originUrl}">${ad.title}</a>
+                                   标题: <a href="${ad.originUrl}">${ad.title}</a><br/>
+                                   来源: ${ad.source}<br/>
+                                   布局: <c:forEach items="${layout}" var="la" varStatus="st">
+                                           <c:if test="${la.layout == ad.layout}">${la.desc}</c:if>
+                                       </c:forEach><br/>
+                                   标识: ${ad.tips}<br/>
+                                   是否要登录:<c:if test="${ad.needLogin}">
+                                                 <font color="red">是</font>
+                                             </c:if>
+                                             <c:if test="${!ad.needLogin}">
+                                                 <font color="red">否</font>
+                                             </c:if>
                                 </td>
                                 <td>
                                     <c:forEach items="${ad.imagesList}" var="img" varStatus="st">
                                         <img src="${img}" id="avatar" name="avatar" style="width: 130px;" />
                                     </c:forEach>
-                                </td>
-                                <td>${ad.source}</td>
-                                <td>
-                                        <c:forEach items="${layout}" var="la" varStatus="st">
-                                            <c:if test="${la.layout == ad.layout}">${la.desc}</c:if>
-                                        </c:forEach>
-                                </td>
-                                <td>${ad.city}</td>
-                                <td>
-                                    ${ad.platform}
                                 </td>
                                 <td>
                                     <c:forEach items="${adsLocations}" var="adsLocation" varStatus="st">
@@ -141,15 +129,15 @@
                                     </c:forEach>
                                 </td>
                                 <td>
-                                        <c:if test="${ad.needLogin}">
-                                            是
-                                        </c:if>
-                                        <c:if test="${!ad.needLogin}">
-                                            否
-                                        </c:if>
+                                    <c:if test="${ad.application == ''}">
+                                          默认
+                                    </c:if>
+                                    <c:if test="${ad.application != ''}">
+                                          ${ad.application}
+                                    </c:if>
                                 </td>
                                 <td>
-                                    ${ad.tips}
+                                    ${ad.platform}
                                 </td>
                                 <td>
                                     <c:choose>
@@ -181,71 +169,57 @@
                                         <a class="set_top update" onclick="setTop(${ad.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>置顶</span></span></a><br/>
                                     </c:if>
                                     <a class="set_top update" href="admin/ads/tj?id=${ad.id}" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>统计</span></span></a><br/>
+                                    <a class="set_top update" href="admin/ads/addmore/${ad.id}" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>追加</span></span></a><br/>
                                 </td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="row-fluid">
-				<div class="span12">
-					<div class="dataTables_paginate paging_bootstrap pagination">
-					共<b>${totalPage}</b>页
-						<ul>
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/ads/list?page=${page - 1}&adsLocation=${adsLocation}&keyword=${keyword}&status=${status}&startTime=${startTime}&endTime=${endTime}&platform=${platform}">&lt;&lt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&lt;&lt;</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/ads/list?page=1&keyword=${keyword}&adsLocation=${adsLocation}&status=${status}&startTime=${startTime}&endTime=${endTime}&platform=${platform}">1</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">1</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 2 and page ne 2}">
-									<li><a
-										href="admin/ads/list?page=2&keyword=${keyword}&adsLocation=${adsLocation}&status=${status}&startTime=${startTime}&endTime=${endTime}&platform=${platform}">2</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">2</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 3 and page ne 3}">
-									<li class=""><a href="admin/ads/list?page=3&keyword=${keyword}&adsLocation=${adsLocation}&status=${status}&startTime=${startTime}&endTime=${endTime}&platform=${platform}">3</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">3</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page lt totalPage}">
-									<li class="next"><a
-										href="admin/ads/list?page=${page + 1}&keyword=${keyword}&adsLocation=${adsLocation}&status=${status}&startTime=${startTime}&endTime=${endTime}&platform=${platform}">&gt;&gt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&gt;&gt;</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</div>
+				<!-- 分页 -->
+                <div class="widget-box" style="margin-top: -10px;">
+                    <div class="widget-header">
+                        <div class="dataTables_info dataTables_paginate paging_bootstrap pagination" style="margin-top: 5px; ">
+                            <ul>
+                                <li class="prev">
+                                    <span class="previous fg-button ui-button ui-state-default ui-state-disabled">${total}条记录, 共${totalPage}页, 当前第${page}页</span>
+                                </li>
+                                <c:choose>
+                                    <c:when test="${page!=1}">
+                                        <li class="prev">
+                                            <a href="javascript:turnPage(1)" title="首页" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-default"><span>首页</span></a>
+                                            <a href="javascript:turnPage(${page-1})" title="上一页" class="previous fg-button ui-button ui-state-default ui-state-default"><span>上一页</span></a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="prev">
+                                            <span class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">首页</span>
+                                            <span class="previous fg-button ui-button ui-state-default ui-state-disabled">上一页</span>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                     <c:when test="${page!=totalPage}">
+                                        <li class="next">
+                                            <a href="javascript:turnPage(${page+1})" title="下一页" class="next fg-button ui-button ui-state-default"><span>下一页</span></a>
+                                            <a href="javascript:turnPage(${totalPage})" title="末页" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default"><span>末页</span></a>
+                                        </li>
+                                     </c:when>
+                                     <c:otherwise>
+                                        <li class="next">
+                                            <span class="next fg-button ui-button ui-state-default ui-state-disabled">下一页</span>
+                                            <span class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">末页</span>
+                                        </li>
+                                     </c:otherwise>
+                                </c:choose>
+                            </ul>
+                         </div>
+                    </div>
+                </div>
+                <!-- 分页 -->
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <div class="popover-mask"></div>
 <jsp:include page="../foot.jsp" />
@@ -330,6 +304,12 @@ if($("#startTime").length > 0){
 function gx(){
     var start = new Date($("#startTime").val().replace(/-/g,   "/")).getTime();
     $("#start_time_hidden").val(start);
+}
+
+function turnPage(page) {
+	// 分页列表URL
+	var href = "admin/ads/list?keyword=${keyword}&adsLocation=${adsLocation}&status=${status}&startTime=${startTime}&endTime=${endTime}&platform=${platform}&page=" + page;
+	window.location.href = href;
 }
 </script>
 </html>

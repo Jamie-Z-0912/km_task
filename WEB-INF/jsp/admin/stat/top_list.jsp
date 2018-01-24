@@ -64,7 +64,8 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th width="30%">uid</th>
+                            <td>序号</td>
+                            <th width="30%">uid</th>
 							<c:if test="${type == 1}">
 							    <th width="30%">现金收益</th>
 							</c:if>
@@ -83,6 +84,7 @@
                         <tbody>
                             <c:forEach items="${top_lists}" var="tl" varStatus="st">
                                 <tr>
+                                    <td>${st.index + 1}</td>
                                     <td>${tl.uid}</td>
                                     <td>${tl.value}</td>
                                     <td>
@@ -92,6 +94,9 @@
                                          <span class="blue"> <i class="icon-edit"> </i> <span>好友</span></span></a></br>
                                         <a class="set_top update" href="admin/blackUser/add?blackAccount=${tl.uid}" style="color: #4f99c6; text-decoration: none;">
                                          <span class="blue"> <i class="icon-edit"> </i> <span>拉黑</span></span></a></br>
+                                        黑名单：
+                                        <c:if test="${tl.inBlackList}"><font  color="#FF0000">是 </font></c:if>
+                                        <c:if test="${!tl.inBlackList}">否</c:if>
                                     </td>
                                 </tr>
                             </c:forEach>

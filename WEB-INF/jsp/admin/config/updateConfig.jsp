@@ -61,8 +61,7 @@
 <jsp:include page="../foot.jsp" />
 </body>
 <script>
-$("#menu_monitor").addClass('active open');//左侧导航栏选中状态
-$("#submenu_config").addClass('active');//左侧导航栏选中状态
+$("#menu_config").addClass('active');
 function cancel() {
         location.reload();
     }

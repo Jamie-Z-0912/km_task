@@ -175,31 +175,74 @@
                                         </td>
                                     </c:if>
 								<td>
-                                    <c:if test="${wd.status==7 || wd.status == 8}">
-                                        <a class="set_top update" href="javascript:success(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>成功</span></span></a><br/>
-                                        <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a></br>
-                                        <a class="set_top update" href="admin/blackUser/add?blackAccount=${wd.uid}" style="color: #4f99c6; text-decoration: none;"><span class="blue">拉黑</span></span></a>
-                                    </c:if>
-                                    <c:if test="${wd.status==6}">
-                                        <c:if test="${wd.duibaOrderNum != ''}">
-                                            <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a>|
+								    <c:if test="${__LOGINUSER.userName == 'lijiao' || __LOGINUSER.userName == 'yanghaiyan' || __LOGINUSER.userName == 'admin'}">
+                                        <c:if test="${wd.status==7 || wd.status == 8}">
+                                            <a class="set_top update" href="javascript:success(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>成功</span></span></a><br/>
+                                            <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a></br>
                                             <a class="set_top update" href="admin/blackUser/add?blackAccount=${wd.uid}" style="color: #4f99c6; text-decoration: none;"><span class="blue">拉黑</span></span></a>
                                         </c:if>
-                                    </c:if>
-                                    <c:if test="${wd.status==5}">
-                                            <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a>
-                                    </c:if>
-                                    <c:if test="${wd.status==10 && wd.duibaOrderNum != ''}">
-                                            <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a>
-                                            <a class="set_top update" href="javascript:success(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>成功</span></span></a><br/>
+                                        <c:if test="${wd.status==6}">
+                                            <c:if test="${wd.duibaOrderNum != ''}">
+                                                <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a>|
+                                                <a class="set_top update" href="admin/blackUser/add?blackAccount=${wd.uid}" style="color: #4f99c6; text-decoration: none;"><span class="blue">拉黑</span></span></a>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${wd.status==5}">
+                                                <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a>
+                                        </c:if>
+                                        <c:if test="${wd.status==10 && wd.duibaOrderNum != ''}">
+                                                <a class="set_top update" href="javascript:fail(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>失败</span></span></a>
+                                                <a class="set_top update" href="javascript:success(${wd.id})" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>成功</span></span></a><br/>
+                                        </c:if>
                                     </c:if>
                                 </td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<!-- 分页 -->
+                <div class="widget-box" style="margin-top: -10px;">
+                    <div class="widget-header">
+                        <div class="dataTables_info dataTables_paginate paging_bootstrap pagination" style="margin-top: 5px; ">
+                            <ul>
+                                <li class="prev">
+                                    <span class="previous fg-button ui-button ui-state-default ui-state-disabled">${total}条记录, 共${totalPage}页, 当前第${page}页</span>
+                                </li>
+                                <c:choose>
+                                    <c:when test="${page!=1}">
+                                        <li class="prev">
+                                            <a href="javascript:turnPage(1)" title="首页" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-default"><span>首页</span></a>
+                                            <a href="javascript:turnPage(${page-1})" title="上一页" class="previous fg-button ui-button ui-state-default ui-state-default"><span>上一页</span></a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="prev">
+                                            <span class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">首页</span>
+                                            <span class="previous fg-button ui-button ui-state-default ui-state-disabled">上一页</span>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                     <c:when test="${page!=totalPage}">
+                                        <li class="next">
+                                            <a href="javascript:turnPage(${page+1})" title="下一页" class="next fg-button ui-button ui-state-default"><span>下一页</span></a>
+                                            <a href="javascript:turnPage(${totalPage})" title="末页" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default"><span>末页</span></a>
+                                        </li>
+                                     </c:when>
+                                     <c:otherwise>
+                                        <li class="next">
+                                            <span class="next fg-button ui-button ui-state-default ui-state-disabled">下一页</span>
+                                            <span class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">末页</span>
+                                        </li>
+                                     </c:otherwise>
+                                </c:choose>
+                            </ul>
+                         </div>
+                    </div>
+                </div>
+                <!-- 分页 -->
 				<c:if test="${__LOGINUSER.userName == 'lijiao' || __LOGINUSER.userName == 'yanghaiyan' || __LOGINUSER.userName == 'admin'}">
-                    <c:if test="${status == 6 && type == 2 && isDuiba == 1}">
+                    <c:if test="${status == 6 && isDuiba == 1}">
                         <button class="btn btn-info" type="submit" onclick="autoVerify();">
                             <i class="icon-ok"></i>自动审核
                         </button>
@@ -208,72 +251,23 @@
                         </button>
                     </c:if>
                 </c:if>
-                <c:if test="${status != 6 && isDuiba != 1}">
-                    <button class="btn btn-info" type="button" onclick="submit_pay()">
-                        提交打款
-                    </button>
-                    &nbsp
-                    <button class="btn btn-info" type="button" onclick="batchConfirmPaySuccess()">
-                        确认成功
-                    </button>
+                <c:if test="${__LOGINUSER.userName == 'admin'}">
+                    <c:if test="${status == 6 && isDuiba == 1}">
+                        <button class="btn btn-info" type="button" onclick="handleWaitVerifyOrder();">
+                            处理待审核订单
+                        </button>
+                    </c:if>
+                    <c:if test="${status == 10 && isDuiba == 1}">
+                        <button class="btn btn-info" type="button" onclick="handlePayingOrder();">
+                            处理提现中订单
+                        </button>
+                    </c:if>
+                    <c:if test="${status == 5 && isDuiba == 1}">
+                        <button class="btn btn-info" type="button" onclick="handleExceptionOrder();">
+                            处理异常订单
+                        </button>
+                    </c:if>
                 </c:if>
-				<div class="row-fluid">
-				<div class="span12">
-					<div class="dataTables_paginate paging_bootstrap pagination">
-					第<b>${page}</b>页, 共<b>${totalPage}</b>页
-						<ul>
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/withdraw/list?page=${page - 1}&status=${status}&type=${type}&uid=${uid}&sort_desc=${sortDesc}&startTime=${startTime}&endTime=${endTime}&region=${region}&isFast=${isFast}&isDuiba=${isDuiba}">&lt;&lt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&lt;&lt;</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/withdraw/list?page=1&status=${status}&type=${type}&uid=${uid}&sort_desc=${sortDesc}&startTime=${startTime}&endTime=${endTime}&region=${region}&isFast=${isFast}&isDuiba=${isDuiba}">1</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">1</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 2 and page ne 2}">
-									<li><a
-										href="admin/withdraw/list?page=2&status=${status}&type=${type}&uid=${uid}&sort_desc=${sortDesc}&startTime=${startTime}&endTime=${endTime}&region=${region}&isFast=${isFast}&isDuiba=${isDuiba}">2</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">2</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 3 and page ne 3}">
-									<li class=""><a href="admin/withdraw/list?page=3&status=${status}&type=${type}&uid=${uid}&sort_desc=${sortDesc}&startTime=${startTime}&endTime=${endTime}&region=${region}&isFast=${isFast}&isDuiba=${isDuiba}">3</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">3</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page lt totalPage}">
-									<li class="next"><a
-										href="admin/withdraw/list?page=${page + 1}&status=${status}&type=${type}&uid=${uid}&sort_desc=${sortDesc}&startTime=${startTime}&endTime=${endTime}&region=${region}&isFast=${isFast}&isDuiba=${isDuiba}">&gt;&gt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&gt;&gt;</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</div>
 			</div>
 		</div>
 	</div>
@@ -290,7 +284,7 @@ function success(id) {
     if(flow_id == null){
         flow_id == '';
     }
-    if (confirm("您确认要执行此操作？")) {
+    if (confirm("您确认要设置提现成功？")) {
         $.ajax({
             url : "admin/withdraw/success?id=" + id + "&flow_id=" + flow_id,
             type : "post",
@@ -316,7 +310,7 @@ function fail(id) {
         alert("请填入失败原因！");
         return;
     }
-    if (confirm("您确认要执行此操作？")) {
+    if (confirm("您确认要设置提现失败？")) {
         $.ajax({
             url : "admin/withdraw/fail?id=" + id + "&reason=" + encodeURIComponent(reason),
             type : "post",
@@ -334,6 +328,51 @@ function fail(id) {
             }
         });
     }
+}
+
+window.onload = function() {
+    $("#checkAll").click(function () {
+        $("input[name='chkItem']").prop("checked", this.checked);
+    });
+
+    $("input[name='chkItem']")
+            .click(
+            function() {
+                var $subs = $("input[name='chkItem']");
+                $("#checkAll")
+                        .prop(
+                        "checked",
+                                $subs.length == $subs
+                                .filter(":checked").length ? true
+                                : false);
+            });
+}
+
+function batchVerifySuccess() {
+    var ids = "";
+    $("input:checkbox[name='chkItem']:checked").each(function(){
+        ids += $(this).val() + ",";
+    });
+    if(ids == ""){
+        alert("请勾选");
+        return ;
+    }
+    $.ajax({
+        url : "admin/withdraw/batchVerify?ids=" + ids,
+        type : "post",
+        dataType : "json",
+        success : function(data) {
+            if (data.status != 1000) {
+                alert("操作失败！" + data.desc);
+            } else {
+                alert("操作成功");
+                location.reload();
+            }
+        },
+        error : function(error) {
+            console.log(error);
+        }
+    });
 }
 
 function autoVerify() {
@@ -367,94 +406,55 @@ function autoVerify() {
     }
 }
 
-window.onload = function() {
-    $("#checkAll").click(function () {
-        $("input[name='chkItem']").prop("checked", this.checked);
-    });
-
-    $("input[name='chkItem']")
-            .click(
-            function() {
-                var $subs = $("input[name='chkItem']");
-                $("#checkAll")
-                        .prop(
-                        "checked",
-                                $subs.length == $subs
-                                .filter(":checked").length ? true
-                                : false);
-            });
-}
-
-// 批量确认打款成功
-function batchConfirmPaySuccess() {
-    var ids = "";
-    $("input:checkbox[name='chkItem']:checked").each(function(){
-        ids += $(this).val() + ",";
-    });
-    if(ids == ""){
-        alert("请勾选");
-        return ;
-    }
-    $.ajax({
-        url : "admin/withdraw/batchConfirmPaySuccess?ids=" + ids,
-        type : "post",
-        dataType : "json",
-        success : function(data) {
-            if (data.status != 1000) {
-                alert("操作失败！" + data.desc);
-            } else {
-                alert("操作成功");
-                location.reload();
-            }
-        },
-        error : function(error) {
-            console.log(error);
-        }
-    });
-}
-
-function submit_pay() {
-    var ids = "";
-    $("input:checkbox[name='chkItem']:checked").each(function(){
-        ids += $(this).val() + ",";
-    });
-    if(ids == ""){
-        alert("请勾选");
-        return ;
-    }
-    $.ajax({
-        url : "admin/withdraw/submit_pay?ids=" + ids,
-        type : "post",
-        dataType : "json",
-        success : function(data) {
-            if (data.status != 1000) {
-                alert("操作失败！" + data.desc);
-            } else {
-                alert("操作成功！提交" + data.data + "条");
-            }
-        },
-        error : function(error) {
-            console.log(error);
-        }
-    });
-}
-
-// 批量审核
-function batchVerifySuccess() {
-    var ids = "";
-    var num = 0;
-    $("input:checkbox[name='chkItem']:checked").each(function(){
-        ids += $(this).val() + ",";
-        num++;
-    });
-    console.log(ids);
-    if (ids == "") {
-        alert("请选择要通过的提现订单!");
-        return ;
-    }
-    if (confirm("确认要审核通过 " + num + " 个提现订单?")) {
+// 处理待审核订单
+function handleWaitVerifyOrder() {
+    if (confirm("确认要处理待审核的提现订单?")) {
         $.ajax({
-            url : "admin/withdraw/batchVerify?ids=" + ids,
+            url : "admin/withdraw/handleWaitVerifyOrder",
+            type : "post",
+            dataType : "json",
+            success : function(data) {
+                if (data.status != 1000) {
+                    alert("操作失败！" + data.desc);
+                } else {
+                    alert("操作成功");
+                    location.reload();
+                }
+            },
+            error : function(error) {
+                console.log(error);
+            }
+        });
+    }
+}
+
+// 处理提现中的订单
+function handlePayingOrder() {
+    if (confirm("确认要处理提现中订单?")) {
+        $.ajax({
+            url : "admin/withdraw/handlePayingOrder",
+            type : "post",
+            dataType : "json",
+            success : function(data) {
+                if (data.status != 1000) {
+                    alert("操作失败！" + data.desc);
+                } else {
+                    alert("操作成功");
+                    location.reload();
+                }
+            },
+            error : function(error) {
+                console.log(error);
+            }
+        });
+    }
+}
+
+// 处理异常订单
+function handleExceptionOrder() {
+    if (confirm("确认要处理异常提现订单?")) {
+        $.ajax({
+            url : "admin/withdraw/handleExceptionOrder",
             type : "post",
             dataType : "json",
             success : function(data) {
@@ -492,6 +492,12 @@ function gx(){
     var end = new Date($("#endTime").val().replace(/-/g,   "/")).getTime();
     $("#start_time_hidden").val(start);
     $("#end_time_hidden").val(end);
+}
+
+function turnPage(page) {
+	// 分页列表URL
+	var href = "admin/withdraw/list?status=${status}&type=${type}&uid=${uid}&sort_desc=${sortDesc}&startTime=${startTime}&endTime=${endTime}&region=${region}&isFast=${isFast}&isDuiba=${isDuiba}&pageSize=${pageSize}&page=" + page;
+	window.location.href = href;
 }
 </script>
 </html>

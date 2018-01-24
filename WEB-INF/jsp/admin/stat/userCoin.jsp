@@ -50,6 +50,7 @@
                             <th>新手阅读</th>
                             <th>新手搜索</th>
                             <th>签到</th>
+                            <th>绑定微信</th>
                             <th>普通签到</th>
                             <th>红包</th>
                             <th>注册</th>
@@ -68,6 +69,8 @@
                             <th>兑换资源补偿</th>
                             <th>采集资源被兑换</th>
                             <th>开宝箱</th>
+                            <th>徒弟活跃</th>
+                            <th>绑定师傅</th>
                             <th>总金币数</th>
                         </tr>
                     </thead>
@@ -81,6 +84,7 @@
                                     <td>${kmbrowser.junior_first_read_article}</td>
                                     <td>${kmbrowser.junior_first_search}</td>
                                     <td>${kmbrowser.checkin}</td>
+                                    <td>${kmbrowser.wx_bind}</td>
                                     <td>${kmbrowser.common_checkin}</td>
                                     <td>${kmbrowser.receive_red_pack}</td>
                                     <td>${kmbrowser.invite_register}</td>
@@ -99,6 +103,10 @@
                                     <td>${kmbrowser.exchange_resource_makeup}</td>
                                     <td>${kmbrowser.resource_be_exchanged}</td>
                                     <td>${kmbrowser.open_box}</td>
+                                    <td>${kmbrowser.friend_second_day_active + kmbrowser.friend_third_day_active
+                                    + kmbrowser.friend_fourth_day_active + kmbrowser.friend_fifth_day_active
+                                    + kmbrowser.friend_sixth_day_active + kmbrowser.friend_seventh_day_active}</td>
+                                    <td>${kmbrowser.invite_relation_bind}</td>
                                     <td>${kmbrowser.totalCoinNum}</td>
                                 </tr>
                         </tbody>

@@ -9,14 +9,13 @@
 	<div id="page-content" class="clearfix">
 		<div class="page-header position-relative">
 			<h1>
-			App版本列表
+			应用版本列表
             </h1>
 		</div>
 		<div class="row-fluid">
 			<div class="row-fluid">
 			    <form action="admin/appVersion/list" method="get" id="basic_validate" name="basic_validate"
                                   class="form-horizontal" novalidate="novalidate">
-
                     <div class="control-group">
                         <label class="control-label">应用</label>
                         <div class="controls">
@@ -49,13 +48,12 @@
 				<table class="table table-bordered table-striped" style="table-layout:fixed; word-break: break-all;">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th width="8%">ID</th>
 							<th>应用</th>
 							<th>平台</th>
-                            <th>版本</th>
-							<th>添加时间</th>
-                            <th>修改时间</th>
-							<th>操作</th>
+                            <th>版本号</th>
+                            <th>最后修改时间</th>
+							<th width="8%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -64,7 +62,7 @@
 								<td>${appVersion.id}</td>
 								<td>
 								    <c:if test="${appVersion.application == ''}">
-                                        默认
+                                        所有
                                     </c:if>
                                     <c:if test="${appVersion.application != ''}">
                                         ${appVersion.application}
@@ -76,7 +74,6 @@
                                 <td>
                                     ${appVersion.version}
                                 </td>
-								<td><suishen_fmt:formatDate value="${appVersion.addedTime}" /></td>
                                 <td><suishen_fmt:formatDate value="${appVersion.updateTime}" /></td>
 								<td>
                                     <a class="set_top update" href="admin/appVersion/update?id=${appVersion.id}" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>编辑</span></span></a><br/>

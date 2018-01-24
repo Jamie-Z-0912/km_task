@@ -48,7 +48,14 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">通知内容(<font color="red">必填</font>)</label>
+                        <label class="control-label">通知标题(<font color="red">可选,10字符以内</font>)</label>
+                        <div class="controls">
+                            <input type="text" id="title" name="title" class="input-xxlarge" value="快马小报"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">通知内容(<font color="red">必填,30字符以内</font>)</label>
                         <div class="controls">
                             <input type="text" id="msg" name="msg" class="input-xxlarge" value=""/>
                         </div>

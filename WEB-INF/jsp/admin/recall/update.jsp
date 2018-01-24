@@ -65,10 +65,9 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">召回时间点(<font color="red">必填</font>),上午:</label>
+                        <label class="control-label">召回时间:</label>
                         <div class="controls">
-                            <input type="text" name="recallRate" class="input-large" value="${recallPlan.swRecallHour}"/>点,
-                            下午:<input type="text" name="recallRate" class="input-large" value="${recallPlan.xwRecallHour}"/>点
+                            <input type="text" name="recallRate" class="input-large" value="${recallPlan.swRecallHour}"/>点
                         </div>
                     </div>
 
@@ -95,7 +94,8 @@
                         <label class="control-label">奖励方式:(<font color="red">必填</font>)</label>
                         <div class="controls">
                             <select name="rewardMethod" id="rewardMethod" style="width: 180px;">
-                                    <option value="card:3">3天加速卡</option>
+                                    <option value="" <c:if test="${recallPlan.rewardMethod == ''}">selected</c:if>>无奖励</option>
+                                    <option value="card:3" <c:if test="${recallPlan.rewardMethod == 'card:3'}">selected</c:if>>3天加速卡</option>
                             </select>
                         </div>
                     </div>

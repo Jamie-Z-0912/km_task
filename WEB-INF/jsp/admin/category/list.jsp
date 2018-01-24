@@ -8,7 +8,7 @@
 <div id="main-content" class="clearfix">
 	<div id="page-content" class="clearfix">
 		<div class="page-header position-relative">
-			<h1><span>资讯分类列表</span>
+			<h1><span>资讯分类</span>
             </h1>
 		</div>
 		<div class="row-fluid">
@@ -21,8 +21,7 @@
                             <th>类型</th>
 							<th>是否允许删除</th>
                             <th>状态</th>
-							<th>添加时间</th>
-							<th>修改时间</th>
+							<th>最后修改时间</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -45,7 +44,6 @@
                                     <c:if test="${cat.status == 0}">下架</c:if>
                                     <c:if test="${cat.status == 1}">正常</c:if>
                                 </td>
-								<td><suishen_fmt:formatDate value="${cat.addedTime}" /></td>
                                 <td><suishen_fmt:formatDate value="${cat.updateTime}" /></td>
 								<td>
                                     <c:if test="${cat.status == 0}">

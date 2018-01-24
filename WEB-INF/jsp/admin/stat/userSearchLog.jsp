@@ -16,17 +16,6 @@
 			<div class="row-fluid">
 			    <form action="admin/users/searchLog" method="get" id="basic_validate" name="basic_validate"
                                   class="form-horizontal" novalidate="novalidate">
-                    <div class="control-group">
-                          <label class="control-label">客户端版本:</label>
-                          <div class="controls">
-                              <select name="clientVersion" id="clientVersion" style="width: 120px;">
-                                  <option value="" <c:if test="${clientVersion == ''}">selected</c:if>>所有</option>
-                                  <c:forEach items="${clientVersions}" var="ver" varStatus="st">
-                                    <option value="${ver}" <c:if test="${ver == clientVersion}">selected</c:if>>${ver}</option>
-                                  </c:forEach>
-                              </select>
-                          </div>
-                   </div>
                    <div class="control-group">
                       <label class="control-label">设备平台</label>
                       <div class="controls">
@@ -84,20 +73,11 @@
                        </div>
                    </div>
                   <div class="control-group">
-                        <label class="control-label">开始时间<br />
+                        <label class="control-label">日期<br />
                         </label>
                         <div class="controls">
                             <input type="text" id="startTime" data-oval=""  />
                             <input type="hidden" name="startTime" id="start_time_hidden" />
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">结束时间<br />
-                        </label>
-                        <div class="controls">
-                            <input type="text" id="endTime" data-oval=""  />
-                            <input type="hidden" name="endTime" id="end_time_hidden" />
                         </div>
                     </div>
                     <div class="form-actions">
@@ -175,63 +155,47 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="row-fluid">
-				<div class="span12">
-					<div class="dataTables_paginate paging_bootstrap pagination">
-					${total}条记录, 共<b>${totalPage}</b>页
-						<ul>
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/users/searchLog?page=${page - 1}&uid=${uid}&source=${source}&startTime=${startTime}&endTime=${endTime}&ip=${ip}&device=${device}&devicePlatform=${devicePlatform}&clientVersion=${clientVersion}&isValid=${isValid}">&lt;&lt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&lt;&lt;</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/users/searchLog?page=1&uid=${uid}&source=${source}&startTime=${startTime}&endTime=${endTime}&ip=${ip}&device=${device}&devicePlatform=${devicePlatform}&clientVersion=${clientVersion}&isValid=${isValid}">1</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">1</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 2 and page ne 2}">
-									<li><a
-										href="admin/users/searchLog?page=2&uid=${uid}&source=${source}&startTime=${startTime}&endTime=${endTime}&ip=${ip}&device=${device}&devicePlatform=${devicePlatform}&clientVersion=${clientVersion}&isValid=${isValid}">2</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">2</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 3 and page ne 3}">
-									<li class=""><a href="admin/users/searchLog?page=3&uid=${uid}&source=${source}&startTime=${startTime}&endTime=${endTime}&ip=${ip}&device=${device}&devicePlatform=${devicePlatform}&clientVersion=${clientVersion}&isValid=${isValid}">3</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">3</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page lt totalPage}">
-									<li class="next"><a
-										href="admin/users/searchLog?page=${page + 1}&uid=${uid}&source=${source}&startTime=${startTime}&endTime=${endTime}&ip=${ip}&device=${device}&devicePlatform=${devicePlatform}&clientVersion=${clientVersion}&isValid=${isValid}">&gt;&gt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&gt;&gt;</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</div>
+				<!-- 分页 -->
+                <div class="widget-box" style="margin-top: -10px;">
+                    <div class="widget-header">
+                        <div class="dataTables_info dataTables_paginate paging_bootstrap pagination" style="margin-top: 5px; ">
+                            <ul>
+                                <li class="prev">
+                                    <span class="previous fg-button ui-button ui-state-default ui-state-disabled">${total}条记录, 共${totalPage}页, 当前第${page}页</span>
+                                </li>
+                                <c:choose>
+                                    <c:when test="${page!=1}">
+                                        <li class="prev">
+                                            <a href="javascript:turnPage(1)" title="首页" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-default"><span>首页</span></a>
+                                            <a href="javascript:turnPage(${page-1})" title="上一页" class="previous fg-button ui-button ui-state-default ui-state-default"><span>上一页</span></a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="prev">
+                                            <span class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">首页</span>
+                                            <span class="previous fg-button ui-button ui-state-default ui-state-disabled">上一页</span>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                     <c:when test="${page!=totalPage}">
+                                        <li class="next">
+                                            <a href="javascript:turnPage(${page+1})" title="下一页" class="next fg-button ui-button ui-state-default"><span>下一页</span></a>
+                                            <a href="javascript:turnPage(${totalPage})" title="末页" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default"><span>末页</span></a>
+                                        </li>
+                                     </c:when>
+                                     <c:otherwise>
+                                        <li class="next">
+                                            <span class="next fg-button ui-button ui-state-default ui-state-disabled">下一页</span>
+                                            <span class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">末页</span>
+                                        </li>
+                                     </c:otherwise>
+                                </c:choose>
+                            </ul>
+                         </div>
+                    </div>
+                </div>
+                <!-- 分页 -->
 			</div>
 		</div>
 	</div>
@@ -245,14 +209,8 @@ $("#submenu_search_log").addClass('active');
 
 if($("#startTime").length > 0){
     $("#startTime").val(new Date(${startTime}).format("yyyy-MM-dd hh:mm:ss"));
-    $("#endTime").val(new Date(${endTime}).format("yyyy-MM-dd hh:mm:ss"));
     gx();
     $("#startTime").slTime({
-        callback:function(){
-            gx();
-        }
-    });
-    $("#endTime").slTime({
         callback:function(){
             gx();
         }
@@ -260,9 +218,12 @@ if($("#startTime").length > 0){
 }
 function gx(){
     var start = new Date($("#startTime").val().replace(/-/g,   "/")).getTime();
-    var end = new Date($("#endTime").val().replace(/-/g,   "/")).getTime();
     $("#start_time_hidden").val(start);
-    $("#end_time_hidden").val(end);
+}
+function turnPage(page) {
+	// 分页列表URL
+	var href = "admin/users/searchLog?uid=${uid}&source=${source}&startTime=${startTime}&ip=${ip}&device=${device}&devicePlatform=${devicePlatform}&isValid=${isValid}&page=" + page;
+	window.location.href = href;
 }
 </script>
 </html>

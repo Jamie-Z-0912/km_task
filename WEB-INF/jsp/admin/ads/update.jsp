@@ -108,7 +108,12 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="control-group"  id="div_show_num">
+                        <label class="control-label">展示次数/天</label>
+                        <div class="controls">
+                            <input type="number" id="showNum" name="showNum" class="input-xlarge" value="${ad.showNum}"/>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label class="control-label">是否要登陆(用户点击广告时)</label>
                         <div class="controls">
@@ -156,6 +161,28 @@
     <script type="text/javascript" src="assets/js/ajaxfileupload.js"></script>
 </body>
 <script>
+
+
+
+$(function(){
+     checkDivShowNum();
+
+     $("#adsLocation").change(function(){
+        checkDivShowNum();
+     });
+
+})
+
+function checkDivShowNum(){
+        var checkValue=$("#adsLocation").val();
+        if(checkValue =='first_screen_assistant'){
+            $("#div_show_num").show();
+        }else{
+            $("#div_show_num").hide();
+
+        }
+}
+
     $("#menu_app").addClass('active open');
     $("#menu_ads").addClass('active');
     function cancel() {

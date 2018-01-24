@@ -32,7 +32,7 @@
                     <input type="hidden" id="operator" name="operator" class="input-large" value="${__LOGINUSER.nickName}"/>
 
                     <div class="control-group">
-                        <label class="control-label">+金币数(小于1500)</label>
+                        <label class="control-label">+金币数(不超过3000金币)</label>
                         <div class="controls">
                             <input type="text" id="coin" name="coin" class="input-large" class="input-xxlarge" value=""/>
                         </div>

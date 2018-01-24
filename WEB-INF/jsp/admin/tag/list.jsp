@@ -63,7 +63,6 @@
                                     <c:if test="${cat.status == 1}">
                                         <a class="set_top update" href="admin/tag/${cat.id}?status=0" style="color: #4f99c6; text-decoration: none;"> <span class="blue"> <span>下架</span></span></a>
                                     </c:if>
-
                                 </td>
 							</tr>
 						</c:forEach>

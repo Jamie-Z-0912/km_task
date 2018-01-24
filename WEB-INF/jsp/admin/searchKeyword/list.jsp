@@ -40,6 +40,28 @@
 						<input type="text" name="source" id="source" data-oval=""  value="${source}"/>
 					</div>
 				</div>
+                <div class="control-group">
+                    <label class="control-label">状态<br /></label>
+                    <div class="controls">
+                        <select name="status" id="status" style="width: 120px;">
+                            <option value="-1" <c:if test="${-1 == status}">selected</c:if>>所有</option>
+                            <option value="1" <c:if test="${1 == status}">selected</c:if>>上架</option>
+                            <option value="0" <c:if test="${0 == status}">selected</c:if>>下架</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">平台<br /></label>
+                    <div class="controls">
+                        <select name="platform" id="platform" style="width: 120px;">
+                            <option value="DEFAULT" <c:if test="${'DEFAULT' == platform}">selected</c:if>>所有</option>
+                            <option value="ANDROID" <c:if test="${'ANDROID' == platform}">selected</c:if>>ANDROID</option>
+                            <option value="IPHONE" <c:if test="${'IPHONE' == platform}">selected</c:if>>IPHONE</option>
+                            <option value="WEB" <c:if test="${'WEB' == platform}">selected</c:if>>WEB</option>
+                            <option value="WEB_WX" <c:if test="${'WEB_WX' == platform}">selected</c:if>>WEB_WX</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-actions" style="position:relative;">
                     <button class="btn btn-info" type="submit">
                         <i class="icon-ok"></i> 查询
@@ -98,63 +120,47 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="row-fluid">
-				<div class="span12">
-					<div class="dataTables_paginate paging_bootstrap pagination">
-					共<b>${totalPage}</b>页
-						<ul>
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/searchKeywords/list?page=${page - 1}&startTime=${startTime}&endTime=${endTime}&source=${source}&url=${url}">&lt;&lt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&lt;&lt;</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page gt 1}">
-									<li><a
-										href="admin/searchKeywords/list?page=1&startTime=${startTime}&endTime=${endTime}&source=${source}&url=${url}">1</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">1</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 2 and page ne 2}">
-									<li><a
-										href="admin/searchKeywords/list?page=2&startTime=${startTime}&endTime=${endTime}&source=${source}&url=${url}">2</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">2</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${totalPage ge 3 and page ne 3}">
-									<li class=""><a href="admin/searchKeywords/list?page=3&startTime=${startTime}&endTime=${endTime}&source=${source}&url=${url}">3</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">3</a></li>
-								</c:otherwise>
-							</c:choose>
-
-							<c:choose>
-								<c:when test="${page lt totalPage}">
-									<li class="next"><a
-										href="admin/searchKeywords/list?page=${page + 1}&startTime=${startTime}&endTime=${endTime}&source=${source}&url=${url}">&gt;&gt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev disabled"><a href="javascript:void(0);">&gt;&gt;</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</div>
+				<!-- 分页 -->
+                <div class="widget-box" style="margin-top: -10px;">
+                    <div class="widget-header">
+                        <div class="dataTables_info dataTables_paginate paging_bootstrap pagination" style="margin-top: 5px; ">
+                            <ul>
+                                <li class="prev">
+                                    <span class="previous fg-button ui-button ui-state-default ui-state-disabled">${total}条记录, 共${totalPage}页, 当前第${page}页</span>
+                                </li>
+                                <c:choose>
+                                    <c:when test="${page!=1}">
+                                        <li class="prev">
+                                            <a href="javascript:turnPage(1)" title="首页" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-default"><span>首页</span></a>
+                                            <a href="javascript:turnPage(${page-1})" title="上一页" class="previous fg-button ui-button ui-state-default ui-state-default"><span>上一页</span></a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="prev">
+                                            <span class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">首页</span>
+                                            <span class="previous fg-button ui-button ui-state-default ui-state-disabled">上一页</span>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                     <c:when test="${page!=totalPage}">
+                                        <li class="next">
+                                            <a href="javascript:turnPage(${page+1})" title="下一页" class="next fg-button ui-button ui-state-default"><span>下一页</span></a>
+                                            <a href="javascript:turnPage(${totalPage})" title="末页" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default"><span>末页</span></a>
+                                        </li>
+                                     </c:when>
+                                     <c:otherwise>
+                                        <li class="next">
+                                            <span class="next fg-button ui-button ui-state-default ui-state-disabled">下一页</span>
+                                            <span class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">末页</span>
+                                        </li>
+                                     </c:otherwise>
+                                </c:choose>
+                            </ul>
+                         </div>
+                    </div>
+                </div>
+                <!-- 分页 -->
 			</div>
 		</div>
 	</div>
@@ -233,6 +239,12 @@ function gx(){
     var end = new Date($("#endTime").val().replace(/-/g,   "/")).getTime();
     $("#start_time_hidden").val(start);
     $("#end_time_hidden").val(end);
+}
+
+function turnPage(page) {
+	// 分页列表URL
+	var href = "admin/searchKeywords/list?startTime=${startTime}&endTime=${endTime}&source=${source}&url=${url}&page=" + page;
+	window.location.href = href;
 }
 </script>
 </html>

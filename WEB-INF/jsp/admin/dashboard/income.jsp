@@ -6,6 +6,14 @@
 <jsp:include page="../header.jsp" />
 <jsp:include page="../sidebar.jsp" />
 <!-- 页面 -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="assets/js/echarts.min.js"></script>
+</head>
+<body>
 <body>
 <div id="main-content" class="clearfix">
     <div id="page-content" class="clearfix">
@@ -19,6 +27,71 @@
             </h1>
         </div>
         <div class="control-group">
+
+            <div id="main" style="width: 1000px;height:400px;"></div>
+            <script type="text/javascript">
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+
+                // 指定图表的配置项和数据
+                var option = {
+                    title : {
+                        text: '各项收入所占比例',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: ['广点通','推啊','变现猫','搜狗','联想','欧朋','360','小说','H5广告','麦田广告','斐凡','内部收入','众智嘉能','其他','百度搜索','清空余额']
+                    },
+                    series : [
+                        {
+                            name: '访问来源',
+                            type: 'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:[
+                                {value:'${gdtIncome}', name:'广点通'},
+                                {value:'${tuiAIncome}', name:'推啊'},
+                                {value:'${bxmIncome}', name:'变现猫'},
+                                {value:'${sogouSearchIncome}', name:'搜狗'},
+                                {value:'${lianxiangSearchIncome}', name:'联想'},
+                                {value:'${operaIncome}', name:'欧朋'},
+                                {value:'${qihuSearchIncome}', name:'360'},
+                                {value:'${novelIncome}', name:'小说'},
+                                {value:'${H5Income}', name:'H5广告'},
+                                {value:'${maitianIncome}', name:'麦田广告'},
+                                {value:'${feifanIncome}', name:'斐凡'},
+                                {value:'${innerIncome}', name:'内部收入'},
+                                {value:'${zzjnIncome}', name:'众智嘉能'},
+                                {value:'${otherIncome}', name:'其他'},
+                                {value:'${baiduSearchIncome}', name:'百度搜索'},
+                                {value:'${clearYueIncome}', name:'清空余额'},
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            </script>
+
             <div class="controls">
                 <input type="text" id="startTime" data-oval="" class="start_time input-large" />
                 <input  type="hidden" name="start_time" id="start_time_hidden" />
@@ -50,6 +123,8 @@
                             <th width="7%">麦田广告</th>
                             <th width="5%">斐凡</th>
                             <th width="5%">内部收入</th>
+                            <th width="5%">众智嘉能</th>
+                            <th width="5%">百度搜索</th>
                             <th width="6%">其他</th>
                             <th width="5%">清空余额</th>
                             <th width="7%">操作</th>
@@ -80,8 +155,10 @@
                                 <td>
                                     <fmt:formatNumber value="${tj.cardIncome + tj.exchangeResourceIncome}" pattern="#0.00" />
                                 </td>
+                                <td>${tj.zzjnIncome}</td>
+                                <td>${tj.baiduSearchIncome}</td>
                                 <td>
-                                <fmt:formatNumber value="${tj.otherIncome + tj.baiduSearchIncome + tj.wbIncome + tj.salesIncome + tj.shenmaSearchIncome}" pattern="#0.00" />
+                                <fmt:formatNumber value="${tj.otherIncome + tj.wbIncome + tj.salesIncome + tj.shenmaSearchIncome}" pattern="#0.00" />
                                 </td>
                                 <td>
                                     <fmt:formatNumber value="${tj.clearYueIncome}" pattern="#0.00" />

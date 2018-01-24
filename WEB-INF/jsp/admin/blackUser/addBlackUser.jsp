@@ -37,6 +37,17 @@
                 </div>
 
                 <div class="control-group">
+                    <label class="control-label">应用</label>
+                    <div class="controls">
+                        <select name="application" id="application" style="width: 120px;">
+                            <c:forEach items="${applicationValues}" var="app" varStatus="st">
+                                <option value="${app}">${app.appName}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
                     <label class="control-label">拉黑类型</label>
                     <div class="controls">
                         <select name="blackReasonType" id="blackReasonType" style="width: 120px;">

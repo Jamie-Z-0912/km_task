@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="suishen_fmt" uri="suishen.libs/fmt" %>
-<jsp:include page="../header.jsp" />
-<jsp:include page="../sidebar.jsp" />
+<jsp:include page="../header.jsp"/>
+<jsp:include page="../sidebar.jsp"/>
 <!-- 页面 -->
 <div id="main-content" class="clearfix">
     <div id="page-content" class="clearfix">
@@ -12,11 +12,17 @@
         </div>
         <div class="row-fluid">
             <div class="row-fluid">
-                <form action="admin/popup/add" method="post" id="basic_validate" name="basic_validate" class="form-horizontal" novalidate="novalidate">
+                <form action="admin/popup/add" method="post" id="basic_validate" name="basic_validate"
+                      class="form-horizontal" novalidate="novalidate">
                     <div class="control-group">
                         <label class="control-label">弹窗标题(可选)</label>
                         <div class="controls">
-                            <input type="text" id="title" name="title" class="input-xlarge" value=""/>
+                            <c:if test="${empty popup}">
+                                <input type="text" id="title" name="title" class="input-xlarge" value=""/>
+                            </c:if>
+                            <c:if test="${not empty popup}">
+                                <input type="text" id="title" name="title" class="input-xlarge" value="${popup.title}"/>
+                            </c:if>
                         </div>
                     </div>
 
@@ -26,12 +32,27 @@
                             <div class='table-pic' id="cover_table" style="float: left;">
                                 <div class="table-picboxW">
                                     <div class='table-picbox'>
-                                        <span><img src="assets/img/avatar.jpg!w160.jpg"
-                                                   id="avatar" name="avatar" style="width: 130px;" /></span> <a
-                                            href="javascript:;" class="table-picevent" id="fileWarp">点击上传
-                                        <input type="file" name="file" id="file" value="点击上传" />
-                                        <input type="hidden" name="image" id="topic_image" value="" />
-                                    </a>
+                                        <c:if test="${empty popup}">
+                                                <span>
+                                                <img src="assets/img/avatar.jpg!w160.jpg" id="avatar" name="avatar"
+                                                     style="width: 130px;"/>
+                                                </span>
+                                            <a href="javascript:;" class="table-picevent" id="fileWarp">点击上传
+                                                <input type="file" name="file" id="file" value="点击上传"/>
+                                                <input type="hidden" name="image" id="topic_image" value=""/>
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${not empty popup}">
+                                                <span>
+                                                <img src="${popup.image}" id="avatar" name="avatar"
+                                                     style="width: 130px;"/>
+                                                </span>
+                                            <a href="javascript:;" class="table-picevent" id="fileWarp">点击上传
+                                                <input type="file" name="file" id="file" value="点击上传"/>
+                                                <input type="hidden" name="image" id="topic_image" value="${popup.image}"/>
+                                            </a>
+                                        </c:if>
+
                                     </div>
                                 </div>
                             </div>
@@ -41,76 +62,132 @@
                     <div class="control-group">
                         <label class="control-label">跳转链接(需以http://开头)</label>
                         <div class="controls">
-                            <input type="text" id="url" name="url"  class="input-xlarge" value=""/>
+                            <c:if test="${empty popup}">
+                                <input type="text" id="url" name="url" class="input-xlarge" value=""/>
+                            </c:if>
+                            <c:if test="${not empty popup}">
+                                <input type="text" id="url" name="url" class="input-xlarge" value="${popup.url}"/>
+                            </c:if>
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">投放平台</label>
                         <div class="controls">
-                            <select name="platform" id="platform" style="width: 180px;">
-                                <c:forEach items="${platforms}" var="pt" varStatus="st">
-                                    <option value="${pt}" <c:if test="${pt == 'DEFAULT'}">selected</c:if>>${pt}</option>
-                                </c:forEach>
-                            </select>
+                            <c:if test="${empty popup}">
+                                <select name="platform" id="platform" style="width: 180px;">
+                                    <c:forEach items="${platforms}" var="pt" varStatus="st">
+                                        <option value="${pt}"
+                                                <c:if test="${pt == 'DEFAULT'}">selected</c:if>>${pt}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
+                            <c:if test="${not empty popup}">
+                                <select name="platform" id="platform" style="width: 180px;">
+                                    <c:forEach items="${platforms}" var="pt" varStatus="st">
+                                        <option value="${pt}"
+                                                <c:if test="${pt == popup.platform}">selected</c:if>>${pt}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
+
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">投放位置</label>
                         <div class="controls">
-                            <select name="location" id="location" style="width: 180px;">
-                                <c:forEach items="${popupLocations}" var="pl" varStatus="st">
-                                    <option value="${pl.location}">${pl.desc}</option>
-                                </c:forEach>
-                            </select>
+                            <c:if test="${empty popup}">
+                                <select name="location" id="location" style="width: 180px;">
+                                    <c:forEach items="${popupLocations}" var="pl" varStatus="st">
+                                        <option value="${pl.location}"> ${pl.desc}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
+                            <c:if test="${not empty popup}">
+                                <select name="location" id="location" style="width: 180px;">
+                                    <c:forEach items="${popupLocations}" var="pl" varStatus="st">
+                                        <option value="${pl.location}"
+                                                <c:if test="${pl.location == popup.location}">selected</c:if>> ${pl.desc}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
+
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">用户组</label>
                         <div class="controls">
-                            <select class="form-control" id="form-field-select-2" multiple="multiple" name="userGroups">
-                                <option value="">所有用户</option>
-                                <c:forEach items="${userGroups}" var="userGroup" varStatus="st">
-                                    <option value="${userGroup.group}">${userGroup.groupName}</option>
-                                </c:forEach>
-                            </select>
+                            <c:if test="${empty popup}">
+                                <select class="form-control" id="form-field-select-2" multiple="multiple"
+                                        name="userGroups">
+                                    <option value="">所有用户</option>
+                                    <c:forEach items="${userGroups}" var="userGroup" varStatus="st">
+                                        <option value="${userGroup.group}">${userGroup.groupName}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
+                            <c:if test="${not empty popup}">
+                                <select class="form-control" id="form-field-select-2" multiple="multiple"
+                                        name="userGroups">
+                                    <option value="">所有用户</option>
+                                    <c:forEach items="${userGroups}" var="userGroup" varStatus="st">
+                                        <option value="${userGroup.group}"
+                                                <c:if test="${userGroup.group == popup.userGroups}">selected</c:if>> ${userGroup.groupName}</option>
+                                    </c:forEach>
+                                </select>
+                            </c:if>
+
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">点击跳转是否要登陆</label>
                         <div class="controls">
-                           <select name="needLogin" id="needLogin" style="width: 180px;">
-                                   <option value="0">否</option>
-                                   <option value="1">是</option>
-                           </select>
+                            <c:if test="${empty popup}">
+                                <select name="needLogin" id="needLogin" style="width: 180px;">
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </c:if>
+                            <c:if test="${not empty popup}">
+                                <select name="needLogin" id="needLogin" style="width: 180px;">
+                                    <option value="0" <c:if test="${'0' == popup.needLogin}">selected</c:if>>否</option>
+                                    <option value="1" <c:if test="${'1' == popup.needLogin}">selected</c:if>>是</option>
+                                </select>
+                            </c:if>
+
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">弹窗次数(开始-结束时间)</label>
                         <div class="controls">
-                            <input type="text" id="num" name="num" class="input-xlarge" value=""/>
+                            <c:if test="${empty popup}">
+                                <input type="text" id="num" name="num" class="input-xlarge" value=""/>
+                            </c:if>
+                            <c:if test="${not empty popup}">
+                                <input type="text" id="num" name="num" class="input-xlarge" value="${popup.num}"/>
+                            </c:if>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">开始时间<br />
+                        <label class="control-label">开始时间<br/>
                         </label>
                         <div class="controls">
-                            <input type="text" id="startTime" data-oval="" class="start_time input-xlarge" />
-                            <input  type="hidden" name="start_time" id="start_time_hidden" />
+                                <input type="text" id="startTime" data-oval="" class="start_time input-xlarge"/>
+                                <input type="hidden" name="start_time" id="start_time_hidden"/>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">结束时间<br />
+                        <label class="control-label">结束时间<br/>
                         </label>
                         <div class="controls">
-                            <input type="text" id="endTime" data-oval="" class="start_time input-xlarge" />
-                            <input  type="hidden" name="end_time" id="end_time_hidden" />
+                                <input type="text" id="endTime" data-oval="" class="start_time input-xlarge"/>
+                                <input type="hidden" name="end_time" id="end_time_hidden"/>
                         </div>
                     </div>
 
@@ -124,41 +201,42 @@
                     </div>
                 </form>
             </div>
-         </div>
+        </div>
     </div>
 </div>
-<jsp:include page="../foot.jsp" />
-    <link rel="stylesheet" href="assets/css/setting.css"/>
-    <script type="text/javascript" src="assets/js/setting.js"></script>
-    <script type="text/javascript" src="assets/js/setting_add_topic.js"></script>
-    <script type="text/javascript" src="assets/js/ajaxfileupload.js"></script>
+<jsp:include page="../foot.jsp"/>
+<link rel="stylesheet" href="assets/css/setting.css"/>
+<script type="text/javascript" src="assets/js/setting.js"></script>
+<script type="text/javascript" src="assets/js/setting_add_topic.js"></script>
+<script type="text/javascript" src="assets/js/ajaxfileupload.js"></script>
 </body>
 <script>
     $("#menu_app").addClass('active open');
     $("#menu_popup").addClass('active');
+
     function cancel() {
         location.reload();
     }
 
-    if($("#startTime").length > 0){
-        $("#startTime").val(new Date().format("yyyy-MM-dd")+" 00:00:00");
-        $("#endTime").val(new Date().format("yyyy-MM-dd")+" 23:59:59");
+    if ($("#startTime").length > 0) {
+        $("#startTime").val(new Date().format("yyyy-MM-dd") + " 00:00:00");
+        $("#endTime").val(new Date().format("yyyy-MM-dd") + " 23:59:59");
         gx();
         $("#startTime").slTime({
-            callback:function(){
+            callback: function () {
                 gx();
             }
         });
         $("#endTime").slTime({
-            callback:function(){
+            callback: function () {
                 gx();
             }
         });
     }
 
-    function gx(){
-        var start = new Date($("#startTime").val().replace(/-/g,   "/")).getTime();
-        var end = new Date($("#endTime").val().replace(/-/g,   "/")).getTime();
+    function gx() {
+        var start = new Date($("#startTime").val().replace(/-/g, "/")).getTime();
+        var end = new Date($("#endTime").val().replace(/-/g, "/")).getTime();
         $("#start_time_hidden").val(start);
         $("#end_time_hidden").val(end);
     }

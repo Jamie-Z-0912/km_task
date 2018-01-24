@@ -3,18 +3,140 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="../header.jsp" />
 <jsp:include page="../sidebar.jsp" />
-<!-- 页面 -->submen_tj_invite
+<!-- 页面 -->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="assets/js/echarts.min.js"></script>
+</head>
+<body>
 <div id="main-content" class="clearfix">
 	<div id="page-content" class="clearfix">
 		<div class="page-header position-relative">
 			<h1>阅读文章统计</h1>
 		</div>
         <div class="control-group">
+
+            <div id="main" style="width: 1000px;height:400px;"></div>
+            <script type="text/javascript">
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+                var option = {
+                    title: {
+                        text: '阅读文章统计',
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['浏览资讯用户数', '浏览资讯总个数', '人均浏览资讯个数', '发放金币数']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataZoom: {
+                                yAxisIndex: 'none'
+                            },
+                            dataView: {readOnly: false},
+                            magicType: {type: ['line', 'bar']},
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap: false,
+                            inverse:true,
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>'${tj.date}'</c:forEach>
+                            ]
+                        }
+                    ],
+                    yAxis: {
+                        type: 'value',
+                    },
+                    series: [
+                        {
+                            name: '浏览资讯用户数',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#948ec9",
+                                    lineStyle: {
+                                        color: "#948ec9"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.totalUser}</c:forEach>
+                            ]
+                        },
+                        {
+                            name: '浏览资讯总个数',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#232eff",
+                                    lineStyle: {
+                                        color: "#232eff"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.totalNum}</c:forEach>
+                            ]
+                        },
+                        {
+                            name: '人均浏览资讯个数',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#ff55b9",
+                                    lineStyle: {
+                                        color: "#ff55b9"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.averageNum}</c:forEach>
+                            ]
+                        },
+                        {
+                            name: '发放金币数',
+                            type: 'line',
+                            itemStyle: {
+                                normal: {
+                                    color: "#ff2118",
+                                    lineStyle: {
+                                        color: "#ff2118"
+                                    }
+                                }
+                            },
+                            data: [
+                                <c:forEach items="${tjResult}" var="tj" varStatus="st"><c:if test="${st.index != 0}">, </c:if>${tj.totalCoinNum}</c:forEach>
+                            ]
+                        }
+                    ]
+                };
+
+
+                console.log(option)
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            </script>
+
             <div class="controls">
                开始日期:&nbsp;&nbsp; <input type="text" id="startTime" data-oval="" class="start_time input-xlarge" />
                 <input  type="hidden" name="start_time" id="start_time_hidden" />
                 &nbsp;&nbsp;
                 <a onclick="query()" class="btn btn-success btn-small"> <i class="icon-search"></i>查询</a>
+                <div onclick="quickQuery1()" class="btn btn-success btn-small" data-id="1">昨天</div>
+                <div onclick="quickQuery3()" class="btn btn-success btn-small" data-id="3">最近3天</div>
+                <div onclick="quickQuery7()" class="btn btn-success btn-small" data-id="7">最近7天</div>
             </div>
         </div>
 		<div class="row-fluid">
@@ -69,6 +191,24 @@ function gx(){
 
 function query(){
     var starttime = $("#start_time_hidden").val();
+    window.location.href = "admin/tj/common?eventType=readArticle&start_time=" + starttime;
+}
+
+function quickQuery1(){
+    var endtime = ${today_end_time};
+    var starttime = endtime - (1*24*60*60*1000);
+    window.location.href = "admin/tj/common?eventType=readArticle&start_time=" + starttime;
+}
+
+function quickQuery3(){
+    var endtime = ${today_end_time};
+    var starttime = endtime - (2*24*60*60*1000);
+    window.location.href = "admin/tj/common?eventType=readArticle&start_time=" + starttime;
+}
+
+function quickQuery7(){
+    var endtime = ${today_end_time};
+    var starttime = endtime - (6*24*60*60*1000);
     window.location.href = "admin/tj/common?eventType=readArticle&start_time=" + starttime;
 }
 </script>
