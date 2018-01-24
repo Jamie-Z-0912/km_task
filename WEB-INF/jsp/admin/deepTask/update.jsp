@@ -213,21 +213,35 @@
 <script src="assets_v2/js/add_picture.js"></script>
 <script>
     $(function () {
-        var time_opts = {
-            showSecond: true,
-            timeFormat: 'hh:mm:ss'
-       }
-        $('#start_time,#end_time').datetimepicker(time_opts);
+        var end_t_opt = {hour:23, minute:59, second:59}
+        $('#start_time').datetimepicker();
+        $('#end_time').datetimepicker(end_t_opt);
         $('#start_time').datetimepicker('setDate', (new Date(${deepTask.startTime})) );
         $('#end_time').datetimepicker('setDate', (new Date(${deepTask.endTime})) );
 
-        $('#start_time').on('change', function (ev, val) {
-            var _day = this.value;
-            $('#startTime').val(new Date(_day).getTime());            
+        $('#start_time').on('change', function() {
+            var _day = this.value,
+                _time = new Date(_day).getTime();
+            $('#startTime').val(_time);
+            var limit = ( _time - new Date().getTime() )/(24*60*60*1000);
+            limit = parseInt(limit);
+            limit = limit>0?limit+1:limit;
+            $("#end_time").datetimepicker('option','minDate',limit);
         });
         $('#end_time').on('change', function (ev) {
-            var _day = this.value;
-            $('#endTime').val(new Date(_day).getTime());   
+            var _day = this.value,
+                _time = _day==''?'':new Date(_day).getTime();
+            $('#endTime').val(_time);
+            if(_time!=''){
+                if(_time<$('#startTime').val()){
+                    $.gritter.add({
+                        text: '结束时间必须晚于开始时间',
+                        class_name: 'gritter-error gritter-center gritter-light',
+                        time: '1000'
+                    });
+                    $('#end_time').val('')
+                }
+            }
         });
         /*时间 end*/
         var step = $('#stepWrap .row').clone();
