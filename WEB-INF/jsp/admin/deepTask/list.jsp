@@ -141,7 +141,7 @@
                                     </td>
                                     <td class="sub_block">
                                         <a class="set_top blue" onclick="taskOff(${deepTask.id})">下架</a>
-                                        <a class="set_top update blue" href="admin/deepTask/order?deep_task_id=${deepTask.id}&status=1">审核</a>
+                                        <a class="set_top update blue" href="admin/deepTask/order?deep_task_id=${deepTask.id}&status=1&startTime=${deepTask.startTime}&endTime=${deepTask.endTime}">审核</a>
                                         <a class="set_top update blue" href="admin/deepTask/addMore?id=${deepTask.id}">追加</a>
                                         <a class="update blue" href="admin/deepTask/update?id=${deepTask.id}">编辑</a>
                                         <a class="set_top update blue" href="admin/deepTask/order?deep_task_id=${deepTask.id}&status=-1&startTime=${deepTask.startTime}&endTime=${deepTask.endTime}">订单</a>

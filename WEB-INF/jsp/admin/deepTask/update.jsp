@@ -5,7 +5,10 @@
 <jsp:include page="../header_v2.jsp"/>
 <div class="main-container" id="main-container">
     <script type="text/javascript">
-        try {ace.settings.check('main-container', 'fixed')} catch (e) {}
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
     </script>
     <jsp:include page="../sidebar_v2.jsp"/>
     <!-- 页面 -->
@@ -19,21 +22,25 @@
                 <div class="row">
                     <div class="col-xs-11">
                         <!-- PAGE CONTENT BEGINS -->
-                        <form action="admin/deepTask/update" class="form-horizontal" id="myform" role="form" method="post">
+                        <form action="admin/deepTask/update" class="form-horizontal" id="myform" role="form"
+                              method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">任务名称</label>
                                 <div class="col-sm-10 pl0">
-                                    <input name="name" id="name" type="text" class="form-control" value="${deepTask.name}">
+                                    <input name="name" id="name" type="text" class="form-control"
+                                           value="${deepTask.name}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">任务单价</label>
                                 <div class="col-sm-4 pl0">
-                                    <input name="rewardCoin" id="rewardCoin" type="text" placeholder="单位：金币" class="form-control" value="${deepTask.rewardCoin}"> 
+                                    <input name="rewardCoin" id="rewardCoin" type="text" placeholder="单位：金币"
+                                           class="form-control" value="${deepTask.rewardCoin}">
                                 </div>
                                 <label class="col-sm-2 control-label">投放数量</label>
                                 <div class="col-sm-4 pl0">
-                                    <input name="totalNum" id="totalNum" type="text" class="form-control" value="${deepTask.totalNum}">
+                                    <input name="totalNum" id="totalNum" type="text" class="form-control"
+                                           value="${deepTask.totalNum}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -41,7 +48,8 @@
                                 <div class="col-sm-4 pl0">
                                     <select name="catName" id="catName" class="form-control">
                                         <c:forEach items="${cats}" var="cat" varStatus="st">
-                                            <option value="${cat.name}" <c:if test="${cat.name == deepTask.catName}">selected</c:if>>${cat.name}</option>
+                                            <option value="${cat.name}"
+                                                    <c:if test="${cat.name == deepTask.catName}">selected</c:if>>${cat.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -49,7 +57,8 @@
                                 <div class="col-sm-4 pl0">
                                     <select name="platform" id="platform" class="form-control">
                                         <c:forEach items="${platforms}" var="pt" varStatus="st">
-                                            <option value="${pt}" <c:if test="${pt == deepTask.platform}">selected</c:if>>${pt}</option>
+                                            <option value="${pt}"
+                                                    <c:if test="${pt == deepTask.platform}">selected</c:if>>${pt}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -58,7 +67,8 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">发布账号</label>
                                 <div class="col-sm-4 pl0">
-                                    <input type="text" name="publisher_nick" value="${deepTask.publisherNick}" readonly="readonly" class="form-control">
+                                    <input type="text" name="publisher_nick" value="${deepTask.publisherNick}"
+                                           readonly="readonly" class="form-control">
                                 </div>
                                 <input type="hidden" name="publisher_avatar" value="${deepTask.publisherAvatar}">
 
@@ -73,7 +83,8 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">任务描述</label>
                                 <div class="col-sm-10 pl0">
-                                    <textarea name="description" id="description" cols="30" rows="3" class="form-control">${deepTask.deepTaskDetails.description}</textarea>
+                                    <textarea name="description" id="description" cols="30" rows="3"
+                                              class="form-control">${deepTask.deepTaskDetails.description}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -114,69 +125,76 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">附图</label>
                                         <div class="pictures">
-                                            <input type="hidden" class="step_img">
                                             <div class="col-sm-2 js-file pl0">
                                                 <input class="file-step" type="file"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <h4 class="header smaller col-xs-12">
-                                <span class="col-xs-8">提交条件</span>
-                                <span class="col-xs-4">
-                                    <a href="javascript:;" class="btn btn-sm btn-info pull-right" id="addFactor">添加条件</a>
+                                <h4 class="header smaller col-xs-12">
+                                    <span class="col-xs-8">提交条件</span>
+                                    <span class="col-xs-4">
+                                    <a href="javascript:;" class="btn btn-sm btn-info pull-right"
+                                       id="addFactor">添加条件</a>
                                 </span>
-                            </h4>
-                            <div id="factorWrap">
-                                <!-- 循环遍历条件 -->
+                                </h4>
+                                <div id="factorWrap">
+                                    <!-- 循环遍历条件 -->
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label name">条件一</label>
+                                            <div class="col-sm-3 pl0">
+                                                <select class="form-control fac_rule">
+                                                    <option value="">无(格式校验)</option>
+                                                    <c:forEach items="${rules}" var="rule" varStatus="st">
+                                                        <option value="${rule.code}">${rule.desc}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-5 pl0">
+                                                <input class="form-control fac_desc"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4 class="header smaller col-xs-12">
+                                    <span class="col-xs-8">示例图</span>
+                                </h4>
                                 <div class="row">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label name">条件一</label>
-                                        <div class="col-sm-3 pl0">
-                                            <select class="form-control fac_rule">
-                                                <option value="">无(格式校验)</option>
-                                                <c:forEach items="${rules}" var="rule" varStatus="st">
-                                                    <option value="${rule.code}">${rule.desc}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-5 pl0">
-                                            <input class="form-control fac_desc"/>
+                                        <label class="col-sm-2 control-label"> </label>
+                                        <div class="pictures">
+                                            <input type="hidden" id="example_img">
+                                            <div class="col-sm-2 js-file pl0">
+                                                <input class="file-shili" type="file"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <h4 class="header smaller col-xs-12">
-                                <span class="col-xs-8">示例图</span>
-                            </h4>
-                            <div class="row">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label"> </label>
-                                    <div class="pictures">
-                                        <input type="hidden" id="example_img">
-                                        <div class="col-sm-2 js-file pl0">
-                                            <input class="file-shili" type="file"/>
-                                        </div>
+                                    <label class="col-sm-2 control-label">温馨提示</label>
+                                    <div class="col-sm-10 pl0">
+                                        <textarea name="notice" id="notice" cols="30" rows="3"
+                                                  class="form-control">${deepTask.notice}</textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <input type="hidden" name="finishSteps" value='${deepTask.deepTaskDetails.finishSteps}'>
-                            <input type="hidden" name="commitInfo" value='${deepTask.deepTaskDetails.commitInfo}'>
-                            <input type="hidden" name="examplePhoto" value='${deepTask.deepTaskDetails.examplePhoto}'>
-                            <input type="hidden" name="deepTaskId" value='${deepTaskId}'>
+                                <input type="hidden" name="finishSteps" value='${deepTask.deepTaskDetails.finishSteps}'>
+                                <input type="hidden" name="commitInfo" value='${deepTask.deepTaskDetails.commitInfo}'>
+                                <input type="hidden" name="examplePhoto"
+                                       value='${deepTask.deepTaskDetails.examplePhoto}'>
+                                <input type="hidden" name="deepTaskId" value='${deepTaskId}'>
 
-                            <div class="clearfix form-actions">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <button class="btn btn-info" id="submitForm" type="button">
-                                        <i class="ace-icon fa fa-check bigger-110"></i> 提交
-                                    </button>
-                                    &nbsp; &nbsp; &nbsp;
-                                    <button class="btn" type="reset">
-                                        <i class="ace-icon fa fa-undo bigger-110"></i> 重填
-                                    </button>
+                                <div class="clearfix form-actions">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button class="btn btn-info" id="submitForm" type="button">
+                                            <i class="ace-icon fa fa-check bigger-110"></i> 提交
+                                        </button>
+                                        &nbsp; &nbsp; &nbsp;
+                                        <button class="btn" type="reset">
+                                            <i class="ace-icon fa fa-undo bigger-110"></i> 重填
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -194,7 +212,7 @@
 <script src="assets_v2/myjs/datetime_range.js"></script>
 <script>
     $(function () {
-        new datetimeRange({startTime:${deepTask.startTime},endTime:${deepTask.endTime}});
+        new datetimeRange({startTime:${deepTask.startTime}, endTime:${deepTask.endTime}});
 
         var step = $('#stepWrap .row').clone();
         var factor = $('#factorWrap .row').clone();
@@ -202,32 +220,32 @@
 
         var el = '.file-step';
         var file_opt = {
-            is_multiple:true, //默认false单图
+            is_multiple: true, //默认false单图
             max_num: 3,//默认3
-            before_remove: function(obj){
+            before_remove: function (obj) {
                 var index = obj.$element.parents('.js-file').index();
                 var val_input = obj.$element.parents('.pictures').find('.step_img');
                 var temp_val = val_input.val().split(',');
-                if(temp_val.length<2){
+                if (temp_val.length < 2) {
                     val_input.val('');
-                }else{
-                    temp_val.remove(index-1);
+                } else {
+                    temp_val.remove(index - 1);
                     val_input.val(temp_val.join(','));
                 }
             },
-            success: function(data, obj){
+            success: function (data, obj) {
                 var index = obj.$element.parents('.js-file').index();
                 var val_input = obj.$element.parents('.pictures').find('.step_img');
                 var temp_val = val_input.val();
                 var img_src = data.data.url;
                 console.log(img_src);
-                if($.trim(temp_val)==''){
+                if ($.trim(temp_val) == '') {
                     val_input.val(img_src);
-                }else{
+                } else {
                     temp_val = temp_val.split(',');
-                    if(index-1<temp_val.length){
-                        temp_val[index-1]=img_src;
-                    }else{
+                    if (index - 1 < temp_val.length) {
+                        temp_val[index - 1] = img_src;
+                    } else {
                         temp_val.push(img_src);
                     }
                     val_input.val(temp_val.join(','));
@@ -254,7 +272,7 @@
                     class_name: 'gritter-error gritter-center gritter-light',
                     time: '1000'
                 });
-            }else{
+            } else {
                 var _new = step.clone();
                 _new.find('.name').text('步骤' + numString[len + 1]);
                 $('#stepWrap').append(_new);
@@ -287,31 +305,34 @@
         /*步骤赋值*/
         var stepData = JSON.parse($('input[name="finishSteps"]').val());
         for (var i = 0; i < stepData.length; i++) {
-            if(i>0) $('#addStep').click();
+            if (i > 0) $('#addStep').click();
             var par = $('#stepWrap .row').eq(i);
             par.find('.step_img').val(stepData[i].imgs.join(','));
             par.find('.step_desc').val(stepData[i].desc);
             par.find('.step_url').val(stepData[i].urls[0]);//做一个链接处理
             var imgs = stepData[i].imgs;
             for (var j = 0; j < imgs.length; j++) {
-                if(j>0) par.find('.add-img').click();
+                if (j > 0) par.find('.add-img').click();
                 var img_src = imgs[j], img_name = img_src.split('/');
-                img_name = img_name[img_name.length-1];
+                img_name = img_name[img_name.length - 1];
                 var file_par = par.find('.js-file').eq(j);
                 file_par.find('.img-file-name')
                     .addClass('hide-placeholder')
-                    .attr({'data-title':img_name})
-                    .append('<img src="'+img_src+'"/>');
-            };
-        };
+                    .attr({'data-title': img_name})
+                    .append('<img src="' + img_src + '"/>');
+            }
+            ;
+        }
+        ;
         /*条件赋值*/
         var facData = JSON.parse($('input[name="commitInfo"]').val());
         for (var i = 0; i < facData.length; i++) {
-            if(i>0) $('#addFactor').click();
+            if (i > 0) $('#addFactor').click();
             var par = $('#factorWrap .row').eq(i);
             par.find('.fac_rule').val(facData[i].rule);
             par.find('.fac_desc').val(facData[i].desc);
-        };
+        }
+        ;
         /*步骤和条件 end*/
 
         /*示例图赋值*/
@@ -319,45 +340,48 @@
             exaImgsPar = $('#example_img').parent();
         $('#example_img').val(exaImgs.join(','))
         for (var i = 0; i < exaImgs.length; i++) {
-            if(i>0) exaImgsPar.find('.add-img').click();
+            if (i > 0) exaImgsPar.find('.add-img').click();
             var img_src = exaImgs[i], img_name = img_src.split('/');
-            img_name = img_name[img_name.length-1];
+            img_name = img_name[img_name.length - 1];
             var par = exaImgsPar.find('.js-file').eq(i);
             par.find('.img-file-name')
                 .addClass('hide-placeholder')
-                .attr({'data-title':img_name})
-                .append('<img src="'+img_src+'"/>');
-        };
+                .attr({'data-title': img_name})
+                .append('<img src="' + img_src + '"/>');
+        }
+        ;
 
         /*条件选择*/
-        $('.fac_rule').on('change', function(){
+        $('.fac_rule').on('change', function () {
             var _self = $(this),
                 $par = $(this).parents('.form-group');
             $par.find('.fac_desc').val(_self.find("option:selected").text());
         })
-        function isEmpty(val,txt){
-            if($.trim(val) == ''){
+
+        function isEmpty(val, txt) {
+            if ($.trim(val) == '') {
                 $.gritter.add({
-                    text: txt+'不能为空',
+                    text: txt + '不能为空',
                     class_name: 'gritter-error gritter-center gritter-light',
                     time: '1300'
                 });
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
-        /*发布账号 end*/
-        $('#submitForm').on('click', function(){
-            if (isEmpty($('#name').val(),'任务名称')) return;
-            if (isEmpty($('#rewardCoin').val(),'任务单价')) return;
-            if (isEmpty($('#totalNum').val(),'任务数量')) return;
-            if (isEmpty($('#description').val(),'任务描述')) return;
-            if (isEmpty($('input[name="startTime"]').val(),'开始时间')) return;
-            if (isEmpty($('input[name="endTime"]').val(),'结束时间')) return;
 
-            var facArr=[], stepArr=[];
-            $('#factorWrap .row').each(function(){
+        /*发布账号 end*/
+        $('#submitForm').on('click', function () {
+            if (isEmpty($('#name').val(), '任务名称')) return;
+            if (isEmpty($('#rewardCoin').val(), '任务单价')) return;
+            if (isEmpty($('#totalNum').val(), '任务数量')) return;
+            if (isEmpty($('#description').val(), '任务描述')) return;
+            if (isEmpty($('input[name="startTime"]').val(), '开始时间')) return;
+            if (isEmpty($('input[name="endTime"]').val(), '结束时间')) return;
+
+            var facArr = [], stepArr = [];
+            $('#factorWrap .row').each(function () {
                 var _self = $(this);
                 var obj = {
                     rule: _self.find('.fac_rule').val(),
@@ -365,13 +389,13 @@
                 };
                 facArr.push(obj);
             });
-            $('#stepWrap .row').each(function(){
+            $('#stepWrap .row').each(function () {
                 var _self = $(this),
                     step_img = _self.find('.step_img').val(),
                     step_url = _self.find('.step_url').val();
                 var obj = {
-                    imgs: step_img==''?[]:step_img.split(','),
-                    urls: step_url==''?[]:step_url.split(','),
+                    imgs: step_img == '' ? [] : step_img.split(','),
+                    urls: step_url == '' ? [] : step_url.split(','),
                     desc: _self.find('.step_desc').val()
                 };
                 stepArr.push(obj);
@@ -379,7 +403,7 @@
             $('input[name="finishSteps"]').val(JSON.stringify(stepArr));
             $('input[name="commitInfo"]').val(JSON.stringify(facArr));
             var exa_img = $('#example_img').val();
-            $('input[name="examplePhoto"]').val(JSON.stringify(exa_img==''?[]:exa_img.split(',')));
+            $('input[name="examplePhoto"]').val(JSON.stringify(exa_img == '' ? [] : exa_img.split(',')));
             $('#myform').submit();
         })
     });

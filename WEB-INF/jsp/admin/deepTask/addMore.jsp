@@ -180,6 +180,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">温馨提示</label>
+                                <div class="col-sm-10 pl0">
+                                        <textarea name="notice" id="notice" cols="30" rows="3"
+                                                  class="form-control">${deepTask.notice}</textarea>
+                                </div>
+                            </div>
                             <input type="hidden" name="finishSteps" value='${deepTask.deepTaskDetails.finishSteps}'>
                             <input type="hidden" name="commitInfo" value='${deepTask.deepTaskDetails.commitInfo}'>
                             <input type="hidden" name="examplePhoto" value='${deepTask.deepTaskDetails.examplePhoto}'>

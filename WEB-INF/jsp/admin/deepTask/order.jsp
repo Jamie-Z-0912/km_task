@@ -122,7 +122,7 @@
                                     </td>
                                     <td class="sub_block">
                                         <c:forEach items="${deepTaskOrder.examplePhoto}" var="var" varStatus="st">
-                                            <span><img src="${var}" alt="" style="width: 130px;"><br/></span>
+                                            <span><img src="${var}" alt="" style="width: 130px; height: 130px;"><br/></span>
                                         </c:forEach>
                                     </td>
                                     <td><suishen_fmt:formatDate value="${deepTaskOrder.addedTime}"/></td>
