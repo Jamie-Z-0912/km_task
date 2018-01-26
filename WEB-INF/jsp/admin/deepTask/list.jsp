@@ -17,18 +17,18 @@
                 <div class="page-header"> <h1>深度任务列表</h1> </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <form action="#" class="form-horizontal" id="myform" role="form">
+                        <form action="admin/deepTask/list" method="get" class="form-horizontal" id="myform" role="form">
                             <div class="form-group">
                                 <div class="col-sm-5">
                                     <label class="col-sm-4 control-label pl0">任务名称</label>
                                     <div class="col-sm-8 pl0">
-                                        <input name="name" id="name" type="text" class="form-control">
+                                        <input name="name" id="name" type="text" value="${name}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
                                     <label class="col-sm-4 control-label pl0">任务ID</label>
                                     <div class="col-sm-8 pl0">
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="id" id="id"  value="${id}" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -36,17 +36,17 @@
                                 <div class="col-sm-5">
                                     <label class="col-sm-4 control-label pl0">开始时间</label>
                                     <div class="col-sm-8 pl0">
-                                        <input type="text" id="q_start_time" data-date-format="yyyy-mm-dd hh:ii:ss" class="form-control"/>
+                                        <input type="text" id="start_time" class="form-control"/>
                                         <!-- 用于提交表单 -->
-                                        <input type="hidden" id="q_startTime" name="startTime">
+                                        <input type="hidden" id="startTime" name="startTime" value="${startTime}">
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
                                     <label class="col-sm-4 control-label pl0">结束时间</label>
                                     <div class="col-sm-8 pl0">
-                                        <input type="text" id="q_end_time" data-date-format="yyyy-mm-dd hh:ii:ss" class="form-control"/>
+                                        <input type="text" id="end_time" class="form-control"/>
                                         <!-- 用于提交表单 -->
-                                        <input type="hidden" id="q_endTime" name="endTime">
+                                        <input type="hidden" id="endTime" name="endTime" value="${endTime}">
                                     </div>
                                 </div>
                             </div>
@@ -54,30 +54,31 @@
                                 <div class="col-sm-4">
                                     <label class="col-sm-4 control-label pl0">任务状态</label>
                                     <div class="col-sm-8 pl0">
-                                        <select name="layout" id="layout" class="form-control">
-                                            <option value="0">000</option>
-                                            <option value="1">111</option>
-                                            <option value="2">222</option>
+                                        <select name="status" id="status" class="form-control">
+                                            <c:forEach items="${statusType}" var="st" varStatus="vt">
+                                                <option value="${st.status}" <c:if test="${st.status == status}">selected</c:if>>${st.desc}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="col-sm-4 control-label pl0">投放平台</label>
                                     <div class="col-sm-8 pl0">
-                                        <select name="layout" id="layout" class="form-control">
-                                            <option value="0">000</option>
-                                            <option value="1">111</option>
-                                            <option value="2">222</option>
+                                        <select name="platform" id="platform" class="form-control">
+                                            <c:forEach items="${platforms}" var="pf" varStatus="st">
+                                                <option value="${pf}" <c:if test="${pf == platform}">selected</c:if>>${pf}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="col-sm-4 control-label pl0">任务类型</label>
                                     <div class="col-sm-8 pl0">
-                                        <select name="layout" id="layout" class="form-control">
-                                            <option value="0">000</option>
-                                            <option value="1">111</option>
-                                            <option value="2">222</option>
+                                        <select name="catName" id="catName" class="form-control">
+                                            <option value="">所有</option>
+                                            <c:forEach items="${cats}" var="cat" varStatus="st">
+                                                <option value="${cat.name}" <c:if test="${cat.name == catName}">selected</c:if>>${cat.name}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -111,7 +112,7 @@
                             <thead>
                                 <tr>
                                     <th>任务ID</th>
-                                    <th>任务标题</th>
+                                    <th>任务名称</th>
                                     <th>类型</th>
                                     <th>单价</th>
                                     <th>投放平台</th>
@@ -122,78 +123,32 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${deepTasks}" var="deepTask" varStatus="st">
                                 <tr>
-                                    <td>123123</td>
-                                    <td>合计合计合计合计合计合计合计合计合计合计</td>
-                                    <td>关注</td>
-                                    <td>800</td>
-                                    <td>安卓</td>
-                                    <td>2018-01-02 15:30:00</td>
-                                    <td>2018-01-12 15:30:00</td>
+                                    <td>${deepTask.id}</td>
+                                    <td>${deepTask.name}</td>
+                                    <td>${deepTask.catName}</td>
+                                    <td>${deepTask.rewardCoin}</td>
+                                    <td>${deepTask.platform}</td>
+                                    <td><suishen_fmt:formatDate value="${deepTask.startTime}" /></td>
+                                    <td><suishen_fmt:formatDate value="${deepTask.endTime}" /></td>
                                     <td class="sub_block">
-                                        <span>投放800个</span>
-                                        <span>已领取600个</span>
-                                        <span>已提交400个</span>
-                                        <span>已通过268个</span>
-                                        <span>已拒绝32个</span>
-                                        <span>待审核100个</span>
+                                        <span>投放${deepTask.totalNum}个</span>
+                                        <span>已领取${deepTask.totalNum - deepTask.leftNum}个</span>
+                                        <c:forEach items="${deepTask.stats}" var="var" varStatus="vt">
+                                            <span>${var.key} : ${var.value}</span>
+                                        </c:forEach>
                                     </td>
                                     <td class="sub_block">
-                                        <a class="set_top blue" href="#">下架</a>
-                                        <a class="set_top update blue" href="#">审核</a>
-                                        <a class="set_top update blue" href="#">追加</a>
-                                        <a class="update blue" href="#">编辑</a>
-                                        <a class="set_top update blue" href="#">订单</a>
+                                        <a class="set_top blue" onclick="taskOff(${deepTask.id})">下架</a>
+                                        <a class="set_top update blue" href="admin/deepTask/order?deep_task_id=${deepTask.id}&status=1">审核</a>
+                                        <a class="set_top update blue" href="admin/deepTask/addMore?id=${deepTask.id}">追加</a>
+                                        <a class="update blue" href="admin/deepTask/update?id=${deepTask.id}">编辑</a>
+                                        <a class="set_top update blue" href="admin/deepTask/order?deep_task_id=${deepTask.id}&status=-1&startTime=${deepTask.startTime}&endTime=${deepTask.endTime}">订单</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>123123</td>
-                                    <td>合计合计合计合计合计合计合计合计合计合计</td>
-                                    <td>关注</td>
-                                    <td>20000</td>
-                                    <td>安卓</td>
-                                    <td>2018-01-02 15:30:00</td>
-                                    <td>2018-01-12 15:30:00</td>
-                                    <td class="sub_block">
-                                        <span>投放20000个</span>
-                                        <span>已领取16000个</span>
-                                        <span>已提交14000个</span>
-                                        <span>已通过2680个</span>
-                                        <span>已拒绝320个</span>
-                                        <span>待审核1000个</span>
-                                    </td>
-                                    <td class="sub_block">
-                                        <a class="set_top blue" href="#">下架</a>
-                                        <a class="set_top update blue" href="#">审核</a>
-                                        <a class="set_top update blue" href="#">追加</a>
-                                        <a class="update blue" href="#">编辑</a>
-                                        <a class="set_top update blue" href="#">订单</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>123123</td>
-                                    <td>合计合计合计合计合计合计合计合计合计合计</td>
-                                    <td>关注</td>
-                                    <td>800</td>
-                                    <td>安卓</td>
-                                    <td>2018-01-02 15:30:00</td>
-                                    <td>2018-01-12 15:30:00</td>
-                                    <td class="sub_block">
-                                        <span>投放800个</span>
-                                        <span>已领取600个</span>
-                                        <span>已提交400个</span>
-                                        <span>已通过268个</span>
-                                        <span>已拒绝32个</span>
-                                        <span>待审核100个</span>
-                                    </td>
-                                    <td class="sub_block">
-                                        <a class="set_top blue" href="#">下架</a>
-                                        <a class="set_top update blue" href="#">审核</a>
-                                        <a class="set_top update blue" href="#">追加</a>
-                                        <a class="update blue" href="#">编辑</a>
-                                        <a class="set_top update blue" href="#">订单</a>
-                                    </td>
-                                </tr>
+                            </c:forEach>
+
                             </tbody>
                         </table>
                     </div>
@@ -204,27 +159,34 @@
 </div>
 <div class="popover-mask"></div>
 <jsp:include page="../foot_v2.jsp" />
+<script src="assets_v2/myjs/datetime_range.js"></script>
 <script>
     $("#menu_deeptask").addClass('active open');
     $("#deeptask_list").addClass('active');
     $(function () {
-        var time_opt = {
-            language: 'cn',
-            autoclose: true
-        };
-        $('#q_start_time,#q_end_time').datetimepicker(time_opt);
-        $('#q_start_time').on('change', function (ev, val) {
-            var _day = this.value;
-            $('#q_startTime').val(new Date(_day).getTime());
-            $('#q_end_time').datetimepicker('setStartDate', _day.split(' ')[0]);
-        });
-        $('#q_end_time').on('change', function (ev) {
-            var _day = this.value;
-            $('#q_endTime').val(new Date(_day).getTime());
-            $('#q_start_time').datetimepicker('setEndDate', _day.split(' ')[0]);
-        });
-        /*时间 end*/
+        new datetimeRange({startTime:${startTime},endTime:${endTime}});
     })
+
+function taskOff(id) {
+    if (confirm("确认下架该任务?")) {
+        $.ajax({
+            url : "admin/deepTask/taskOff?id=" + id,
+            type : "post",
+            dataType : "json",
+            success : function(data) {
+                if (data.status != 1000) {
+                    alert("操作失败！" + data.desc);
+                } else {
+                    alert("操作成功");
+                    location.reload();
+                }
+            },
+            error : function(error) {
+                console.log(error);
+            }
+        });
+    }
+    }
 </script>
 </body>
 </html>

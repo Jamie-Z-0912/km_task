@@ -5,5 +5,99 @@ table.table tr td.sub_block *{display: block;}
 table.table tr td.sub_block img{ max-width: 100%;}
 table.table tr td{word-break: break-word;}
 
-.ace-file-multiple .ace-file-container .ace-file-name.large{height: 123px; overflow: hidden;}
-.ace-file-multiple .ace-file-container .ace-file-name.large img{max-width: 100%;}
+.img-file-input{ width: 100%; position: relative; height: 120px; border: 1px dashed #aaa; border-radius: 4px; text-align: center;}
+.img-file-input:hover{border-color:#f59942}
+.img-file-input input[type=file]{
+	position:absolute;
+	top:0;
+	z-index:1;
+	opacity:0;
+	filter:alpha(opacity=0);
+	width: 100%;
+	height: 100%;
+	display: block;
+	cursor:pointer;
+}
+.img-file-input .img-file-name {
+	position: absolute;
+	top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 28px;
+    font-size: 13px;
+    color: #888;
+}
+.img-file-input .img-file-name:before {    
+	display: inline-block;
+    content: attr(data-text);
+    position: relative;
+    right: 0;
+    left: 0;
+    margin: 12px;
+    line-height: 22px;
+    background-color: #FFF;
+    color: #CCC;
+    font-size: 18px;
+    font-weight: 700;
+    border-width: 0;
+}
+.img-file-input .img-file-name:after {    
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: block;    
+    content: attr(data-title);
+    color: #fff;
+    background-color: rgba(0,0,0,.7);
+}
+.img-file-input .img-file-name .ace-icon {
+    position: relative;
+    display: block;
+    text-align: center;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    line-height: 64px;
+    height: auto;
+    margin: 0 auto;
+    font-family: FontAwesome;
+    font-size: 64px;
+    border: 2px solid #FFF;
+    color: #D5D5D5;
+    -webkit-transition: all .1s;
+    -o-transition: all .1s;
+    transition: all .1s;
+    background-color: transparent;
+}
+.img-file-name.hide-placeholder:before,
+.img-file-name.hide-placeholder .ace-icon {
+    display: none !important;
+}
+.img-file-name.hide-placeholder img{
+	display: block;
+	width: 100%;
+}
+.img-file-input .remove {
+    position: absolute;
+    display: none;
+    right: -10px;
+    top: -6px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #78afd0;
+    border-radius: 100%;
+    color: #FFF;
+    z-index: 1;
+    text-decoration: none;
+}
+.img-file-name.hide-placeholder~.remove{
+    display: block;
+}
+

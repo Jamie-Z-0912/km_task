@@ -46,3 +46,14 @@
 		<!-- ace scripts -->
 		<script src="assets_v2/js/ace-elements.min.js"></script>
 		<script src="assets_v2/js/ace.min.js"></script>
+		<script>
+		    Array.prototype.remove = function(dx){
+				if( isNaN(dx) || dx > this.length ){ return false; }
+				for(var i = 0, n = 0; i < this.length; i++){
+					if(this[i] != this[dx]){
+						this[n++] = this[i];
+					}
+				}
+				this.length -= 1;
+			}
+		</script>

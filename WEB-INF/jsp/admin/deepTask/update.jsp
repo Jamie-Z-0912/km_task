@@ -9,7 +9,6 @@
     </script>
     <jsp:include page="../sidebar_v2.jsp"/>
     <!-- 页面 -->
-    ${deepTask.deepTaskDetails}
     <div class="main-content">
         <!-- here area:basics/content.breadcrumbs -->
         <div id="page-content" class="page-content">
@@ -80,13 +79,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">开始时间</label>
                                 <div class="col-sm-4 pl0">
-                                    <input type="text" id="start_time" data-date-format="yyyy-mm-dd hh:ii:ss">
+                                    <input type="text" id="start_time">
                                     <input type="hidden" id="startTime" name="startTime" value="${deepTask.startTime}">
                                 </div>
 
                                 <label class="col-sm-2 control-label">结束时间</label>
                                 <div class="col-sm-4 pl0">
-                                    <input type="text" id="end_time" data-date-format="yyyy-mm-dd hh:ii:ss"/>
+                                    <input type="text" id="end_time"/>
                                     <input type="hidden" id="endTime" name="endTime" value="${deepTask.endTime}">
                                 </div>
                             </div>
@@ -117,16 +116,7 @@
                                         <div class="pictures">
                                             <input type="hidden" class="step_img">
                                             <div class="col-sm-2 js-file pl0">
-                                                <input class="js-file-input" type="file"/>
-                                            </div>
-                                            <div class="col-sm-2 js-addimg pl0">
-                                                <div class="ace-file-input ace-file-multiple">
-                                                    <span class="ace-file-container" data-title="添加图片">
-                                                        <span class="ace-file-name">
-                                                        <i class="ace-icon glyphicon glyphicon-plus"></i>
-                                                        </span>
-                                                    </span>
-                                                </div>
+                                                <input class="file-step" type="file"/>
                                             </div>
                                         </div>
                                     </div>
@@ -164,19 +154,9 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label"> </label>
                                     <div class="pictures">
-                                        <input type="hidden" id="example_img"><!-- 注意赋值 -->
-                                        <!-- 循环遍历示例图 -->
+                                        <input type="hidden" id="example_img">
                                         <div class="col-sm-2 js-file pl0">
-                                            <input class="js-file-input" type="file"/>
-                                        </div>
-                                        <div class="col-sm-2 js-addimg pl0">
-                                            <div class="ace-file-input ace-file-multiple">
-                                                <span class="ace-file-container" data-title="添加图片">
-                                                    <span class="ace-file-name">
-                                                    <i class="ace-icon glyphicon glyphicon-plus"></i>
-                                                    </span>
-                                                </span>
-                                            </div>
+                                            <input class="file-shili" type="file"/>
                                         </div>
                                     </div>
                                 </div>
@@ -210,58 +190,53 @@
     $("#menu_deeptask").addClass('active open');
     $("#deeptask_list").addClass('active');
 </script>
-<script src="assets_v2/js/add_picture.js"></script>
+<script src="assets_v2/myjs/uploadImg.js"></script>
+<script src="assets_v2/myjs/datetime_range.js"></script>
 <script>
     $(function () {
-        var end_t_opt = {hour:23, minute:59, second:59}
-        $('#start_time').datetimepicker();
-        $('#end_time').datetimepicker(end_t_opt);
-        $('#start_time').datetimepicker('setDate', (new Date(${deepTask.startTime})) );
-        $('#end_time').datetimepicker('setDate', (new Date(${deepTask.endTime})) );
+        new datetimeRange({startTime:${deepTask.startTime},endTime:${deepTask.endTime}});
 
-        $('#start_time').on('change', function() {
-            var _day = this.value,
-                _time = new Date(_day).getTime();
-            $('#startTime').val(_time);
-            var limit = ( _time - new Date().getTime() )/(24*60*60*1000);
-            limit = parseInt(limit);
-            limit = limit>0?limit+1:limit;
-            $("#end_time").datetimepicker('option','minDate',limit);
-        });
-        $('#end_time').on('change', function (ev) {
-            var _day = this.value,
-                _time = _day==''?'':new Date(_day).getTime();
-            $('#endTime').val(_time);
-            if(_time!=''){
-                if(_time<$('#startTime').val()){
-                    $.gritter.add({
-                        text: '结束时间必须晚于开始时间',
-                        class_name: 'gritter-error gritter-center gritter-light',
-                        time: '1000'
-                    });
-                    $('#end_time').val('')
-                }
-            }
-        });
-        /*时间 end*/
         var step = $('#stepWrap .row').clone();
         var factor = $('#factorWrap .row').clone();
         var numString = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-        var el = '.js-file-input';
+
+        var el = '.file-step';
         var file_opt = {
-            style: 'well',
-            btn_choose: '选择图片',
-            no_icon: 'fa fa-picture-o',
-            allowExt: ["jpeg", "jpg", "png", "gif", "bmp"],
-            allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"],
-            btn_change: null,
-            thumbnail: 'fit',
-            preview_error: function (filename, error_code) {
+            is_multiple:true, //默认false单图
+            max_num: 3,//默认3
+            before_remove: function(obj){
+                var index = obj.$element.parents('.js-file').index();
+                var val_input = obj.$element.parents('.pictures').find('.step_img');
+                var temp_val = val_input.val().split(',');
+                if(temp_val.length<2){
+                    val_input.val('');
+                }else{
+                    temp_val.remove(index-1);
+                    val_input.val(temp_val.join(','));
+                }
+            },
+            success: function(data, obj){
+                var index = obj.$element.parents('.js-file').index();
+                var val_input = obj.$element.parents('.pictures').find('.step_img');
+                var temp_val = val_input.val();
+                var img_src = data.data.url;
+                console.log(img_src);
+                if($.trim(temp_val)==''){
+                    val_input.val(img_src);
+                }else{
+                    temp_val = temp_val.split(',');
+                    if(index-1<temp_val.length){
+                        temp_val[index-1]=img_src;
+                    }else{
+                        temp_val.push(img_src);
+                    }
+                    val_input.val(temp_val.join(','));
+                }
             }
         };
-        new upload(el, file_opt, 3, function (d) {
-            console.log(d);
-        });
+        $(el).uploadImg(file_opt);
+        $('.file-shili').uploadImg(file_opt);
+
         $('#addStep').on('click', function () {
             var len = $('#stepWrap .row').length;
             if (len == 10) {
@@ -283,7 +258,7 @@
                 var _new = step.clone();
                 _new.find('.name').text('步骤' + numString[len + 1]);
                 $('#stepWrap').append(_new);
-                $(el).ace_file_input(file_opt);
+                $(el).uploadImg(file_opt);
             }
         })
         $('#addFactor').on('click', function () {
@@ -319,15 +294,14 @@
             par.find('.step_url').val(stepData[i].urls[0]);//做一个链接处理
             var imgs = stepData[i].imgs;
             for (var j = 0; j < imgs.length; j++) {
-                if(j>0) par.find('.js-addimg').click();
+                if(j>0) par.find('.add-img').click();
                 var img_src = imgs[j], img_name = img_src.split('/');
                 img_name = img_name[img_name.length-1];
                 var file_par = par.find('.js-file').eq(j);
-                file_par.find('.ace-file-container').removeAttr('data-title');
-                file_par.find('.ace-file-name')
-                    .html('<img src="'+img_src+'" style="width:100%;" />')
-                    .addClass('large')
-                    .attr('data-title',img_name);
+                file_par.find('.img-file-name')
+                    .addClass('hide-placeholder')
+                    .attr({'data-title':img_name})
+                    .append('<img src="'+img_src+'"/>');
             };
         };
         /*条件赋值*/
@@ -345,15 +319,14 @@
             exaImgsPar = $('#example_img').parent();
         $('#example_img').val(exaImgs.join(','))
         for (var i = 0; i < exaImgs.length; i++) {
-            if(i>0) exaImgsPar.find('.js-addimg').click();
+            if(i>0) exaImgsPar.find('.add-img').click();
             var img_src = exaImgs[i], img_name = img_src.split('/');
             img_name = img_name[img_name.length-1];
             var par = exaImgsPar.find('.js-file').eq(i);
-            par.find('.ace-file-container').removeAttr('data-title');
-            par.find('.ace-file-name')
-                .html('<img src="'+img_src+'" style="width:100%;" />')
-                .addClass('large')
-                .attr('data-title',img_name);
+            par.find('.img-file-name')
+                .addClass('hide-placeholder')
+                .attr({'data-title':img_name})
+                .append('<img src="'+img_src+'"/>');
         };
 
         /*条件选择*/
@@ -380,8 +353,8 @@
             if (isEmpty($('#rewardCoin').val(),'任务单价')) return;
             if (isEmpty($('#totalNum').val(),'任务数量')) return;
             if (isEmpty($('#description').val(),'任务描述')) return;
-            if (isEmpty($('#startTime').val(),'开始时间')) return;
-            if (isEmpty($('#endTime').val(),'结束时间')) return;
+            if (isEmpty($('input[name="startTime"]').val(),'开始时间')) return;
+            if (isEmpty($('input[name="endTime"]').val(),'结束时间')) return;
 
             var facArr=[], stepArr=[];
             $('#factorWrap .row').each(function(){
