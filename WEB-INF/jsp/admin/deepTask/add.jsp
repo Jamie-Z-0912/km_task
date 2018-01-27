@@ -210,7 +210,7 @@
 <script>
     $(function () {
         new datetimeRange();
-
+    $('#start_time,#end_time').val('');
         var step = $('#stepWrap .row').clone();
         var factor = $('#factorWrap .row').clone();
         var numString = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
